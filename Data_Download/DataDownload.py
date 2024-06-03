@@ -1,15 +1,22 @@
 import key, pathlib, requests
 
-url = "https://v1.afl.api-sports.io/status"
+class Sport(object):
+    def __init__(self, sport):
+        self.sport = sport
+        self.url = "https://v1."+sport+".api-sports.io/status"
 
-payload={}
-headers = {
-        'x-apisports-key': key.API_key
-    }
+        self.payload={}
+        self.headers = {
+            'x-apisports-key': key.API_key
+        }
 
-response = requests.request("GET", url, headers=headers, data=payload).json()
+    def get_status(self):
+        response = requests.request("GET", self.url, headers=self.headers, data=self.payload).json()
+        print(response)
 
-print(response)
+AFL = Sport('afl')
+
+AFL.get_status()
 
 # AFL= 'Data_Download/'+'AFL'
 
