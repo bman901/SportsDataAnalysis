@@ -1,3 +1,7 @@
-import key
+import key, os
 
-print(key.API_key)
+AFL= 'AFL'
+path = os.path.join('Data_Download/'+AFL)
+
+os.mkdir(path)
+
