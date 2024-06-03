@@ -1,5 +1,7 @@
 import key, pathlib, requests, json
 
+sports = ['afl']
+
 class Sport(object):
     def __init__(self, sport):
         self.sport = sport
