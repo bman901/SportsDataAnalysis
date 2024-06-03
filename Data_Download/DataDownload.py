@@ -1,4 +1,4 @@
-import key, pathlib, requests
+import key, pathlib, requests, json
 
 class Sport(object):
     def __init__(self, sport):
@@ -18,16 +18,17 @@ AFL = Sport('afl')
 
 AFL.get_status()
 
-# AFL= 'Data_Download/'+'AFL'
+AFL_folder = 'Data_Download/'+'AFL'
 
-# p = pathlib.Path(AFL)
+p = pathlib.Path(AFL_folder)
 
-# p.mkdir(parents=True, exist_ok=True)
+p.mkdir(parents=True, exist_ok=True)
 
-# fn = "test.txt"
+fn = "test.json"
 
-# result = str([1,2,3])
+result = AFL.get_status()
 
-# filepath = p / fn
-# with filepath.open("w", encoding ="utf-8") as f:
-#     f.write(result)
+filepath = p / fn
+
+with filepath.open("w") as json_file:
+    json.dump(result, json_file)
