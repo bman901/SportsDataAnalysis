@@ -1,7 +1,8 @@
-import key, os
+import key, pathlib
 
-AFL= 'AFL'
-path = os.path.join('Data_Download/'+AFL)
+AFL= 'Data_Download/'+'AFL'
 
-os.mkdir(path)
+p = pathlib.Path(AFL)
+
+p.mkdir(parents=True, exist_ok=True)
 
