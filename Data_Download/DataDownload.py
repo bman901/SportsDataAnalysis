@@ -5,11 +5,23 @@ class Sport(object):
         self.sport = sport
         self.version = version
         self.url = "https://"+self.version+"."+self.sport+".api-sports.io"
-        self.sport_folder = "Data_Download/Sports_Data/"+self.sport
+        self.sport_folder = "Data_Download/Sports_Data/"+str(self.sport).capitalize()
         self.payload={}
         self.headers = {
             'x-apisports-key': key.API_key
         }
+
+    def get_sport(self):
+        return(self.sport)
+    
+    def get_version(self):
+        return(self.version)
+
+    def set_sport(self, sport):
+        self.sport = sport
+    
+    def set_version(self, version):
+        self.version = version
 
     def create_folder(self, folder):
         path = pathlib.Path(folder) #set folder filepath
@@ -25,27 +37,21 @@ class Sport(object):
     def call_API(self, url):
         response = requests.request("GET", url, headers=self.headers, data=self.payload).json()
         return(response)
+    
+    def API_request(self, call):
+        url = self.url+"/"+call #Set URL for API
+        response = self.call_API(url) #Get data
+        folder = self.sport_folder+"/"+str(call).capitalize() #Folder filepath for storage
+        self.create_file(self.create_folder(folder), str(call).capitalize(), response) #Create data file within folder
 
     def get_status(self):
-        url = self.url+"/status" #Set URL for API
-        response = self.call_API(url) #Get data
-        folder = self.sport_folder+"/Status" #Folder filepath for storage
-        self.create_file(self.create_folder(folder), 'Status', response) #Create data file within folder
-        return(response)
+        self.API_request('status')
 
     def get_leagues(self):
-        url = self.url+"/leagues" #Set URL for API
-        response = self.call_API(url) #Get data
-        folder = self.sport_folder+"/Leagues" #Folder filepath for storage
-        self.create_file(self.create_folder(folder), 'Leagues', response) #Create data file within folder
-        return(response)
+        self.API_request('leagues')
     
     def get_seasons(self):
-        url = self.url+"/seasons" #Set URL for API
-        response = self.call_API(url) #Get data
-        folder = self.sport_folder+"/Seasons" #Folder filepath for storage
-        self.create_file(self.create_folder(folder), 'Seasons', response) #Create data file within folder
-        return(response)
+        self.API_request('seasons')
 
 for value in sports.sports_dic:
     sport = Sport(value, sports.sports_dic[value])
