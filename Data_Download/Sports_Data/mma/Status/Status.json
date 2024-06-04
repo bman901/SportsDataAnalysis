@@ -19,7 +19,7 @@
             "active": true
         },
         "requests": {
-            "current": 2,
+            "current": 5,
             "limit_day": 100
         }
     }
