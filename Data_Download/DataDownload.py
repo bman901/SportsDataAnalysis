@@ -1,13 +1,11 @@
-import key, pathlib, requests, json
-
-sports = {'afl':'v1','basketball':'v1'}
+import key, pathlib, requests, json,sports
 
 class Sport(object):
     def __init__(self, sport, version):
         self.sport = sport
         self.version = version
         self.url = "https://"+self.version+"."+self.sport+".api-sports.io"
-        self.sport_folder = "Data_Download/"+self.sport
+        self.sport_folder = "Data_Download/Sports_Data/"+self.sport
         self.payload={}
         self.headers = {
             'x-apisports-key': key.API_key
@@ -49,8 +47,8 @@ class Sport(object):
         self.create_file(self.create_folder(folder), 'Seasons', response) #Create data file within folder
         return(response)
 
-for value in sports:
-    sport = Sport(value, sports[value])
+for value in sports.sports_dic:
+    sport = Sport(value, sports.sports_dic[value])
     sport.get_status()
     sport.get_leagues()
     sport.get_seasons()
