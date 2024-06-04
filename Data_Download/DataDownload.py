@@ -12,7 +12,7 @@ class Sport(object):
 
     def get_status(self):
         response = requests.request("GET", self.url, headers=self.headers, data=self.payload).json()
-        print(response)
+        return(response)
 
 AFL = Sport('afl')
 
@@ -30,5 +30,5 @@ result = AFL.get_status()
 
 filepath = p / fn
 
-with filepath.open("w") as json_file:
-    json.dump(result, json_file)
+with open(filepath, "w", encoding='utf-8') as f:
+    json.dump(result, f, ensure_ascii=False, indent=4)
