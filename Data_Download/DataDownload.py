@@ -1,10 +1,12 @@
 import key, pathlib, requests, json
 
-sports = ['afl','basketball'] #Note, there is an identified issue with football being v3; need to update this to a dictionary
+sports = {'afl':'v1','basketball':'v1'}
 
 class Sport(object):
-    def __init__(self, sport):
+    def __init__(self, sport, version):
         self.sport = sport
+        self.version = version
+        self.url = "https://"+self.version+"."+self.sport+".api-sports.io"
         self.sport_folder = 'Data_Download/'+self.sport
         self.payload={}
         self.headers = {
@@ -22,13 +24,17 @@ class Sport(object):
         with open(filepath, "w", encoding='utf-8') as f:
             json.dump(result, f, ensure_ascii=False, indent=4) #create file
 
-    def get_status(self):
-        url = "https://v1."+self.sport+".api-sports.io/status"
-        response = requests.request("GET", url, headers=self.headers, data=self.payload).json() #Get status data
-        folder = self.sport_folder+'/Status' #Status folder filepath
-        self.create_file(self.create_folder(folder), 'Status', response)
+    def call_API(self, url):
+        response = requests.request("GET", url, headers=self.headers, data=self.payload).json()
         return(response)
 
-for i in sports:
-    i = Sport(i)
-    i.get_status()
+    def get_status(self):
+        url = self.url+"/status" #Set status URL for API
+        response = self.call_API(url) #Get status data
+        folder = self.sport_folder+"/Status" #Status folder filepath
+        self.create_file(self.create_folder(folder), 'Status', response) #Create Status data file
+        return(response)
+
+for value in sports:
+    sport = Sport(value, sports[value])
+    sport.get_status()
