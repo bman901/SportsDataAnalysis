@@ -13,13 +13,13 @@ class Sport(object):
 
     def get_sport(self):
         return(self.sport)
-    
-    def get_version(self):
-        return(self.version)
 
     def set_sport(self, sport):
         self.sport = sport
-    
+
+    def get_version(self):
+        return(self.version)
+
     def set_version(self, version):
         self.version = version
 
@@ -43,16 +43,22 @@ class Sport(object):
         response = self.call_API(url) #Get data
         return(response)
         
-    def download_data(self, call, qualifiers=""):
+    def download_data(self, folder, call, qualifiers=""):
         response = self.API_request(call, qualifiers)
-        folder = self.sport_folder+"/"+str(call).capitalize() #Folder filepath for storage
-        self.create_file(self.create_folder(folder), str(call).capitalize(), response) #Create data file within folder
+        #folder = self.sport_folder+"/"+str(call).capitalize() #Folder filepath for storage
+        self.create_file(folder, str(call).capitalize(), response) #Create data file within folder
 
     def get_status(self):
-        self.download_data('status')
+        folder = self.sport_folder+"/"
+        self.download_data(folder, 'status')
 
     def get_leagues(self):
-        self.download_data('leagues')
+        self.download_data(self.sport_folder+"/",'leagues')
     
     def get_seasons(self):
-        self.download_data('seasons')
+        self.download_data(self.sport_folder+"/",'seasons')
+
+    def set_up_sport(self):
+        self.get_status()
+        # self.get_leagues()
+        # self.get_seasons()
