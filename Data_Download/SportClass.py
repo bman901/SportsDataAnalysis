@@ -45,11 +45,10 @@ class Sport(object):
         
     def download_data(self, folder, call, qualifiers=""):
         response = self.API_request(call, qualifiers)
-        #folder = self.sport_folder+"/"+str(call).capitalize() #Folder filepath for storage
         if "/" in call:
-            self.create_file(folder, str(call).capitalize().rsplit("/", 1)[1], response) #Create data file within folder
+            self.create_file(folder, str(call).capitalize().rsplit("/", 1)[1], response) #Set the filename to anything beyond the '/' in the call, then create data file
         else:
-            self.create_file(folder, str(call).capitalize(), response)
+            self.create_file(folder, str(call).capitalize(), response) #Create data file within folder
 
     def get_status(self):
         self.download_data(self.sport_folder,"status")
