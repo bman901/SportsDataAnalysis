@@ -43,19 +43,19 @@ class Sport(object):
         response = self.call_API(url) #Get data
         return(response)
         
-
     def download_data(self, call):
+        response = self.API_request(call)
         folder = self.sport_folder+"/"+str(call).capitalize() #Folder filepath for storage
-        self.create_file(self.create_folder(folder), str(call).capitalize(), self.API_request(call)) #Create data file within folder
+        self.create_file(self.create_folder(folder), str(call).capitalize(), response) #Create data file within folder
 
     def get_status(self):
         self.download_data('status')
 
     def get_leagues(self):
-        self.API_request('leagues')
+        self.download_data('leagues')
     
     def get_seasons(self):
-        self.API_request('seasons')
+        self.download_data('seasons')
 
 
 def download_data():
