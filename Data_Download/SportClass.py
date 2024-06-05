@@ -46,16 +46,22 @@ class Sport(object):
     def download_data(self, folder, call, qualifiers=""):
         response = self.API_request(call, qualifiers)
         #folder = self.sport_folder+"/"+str(call).capitalize() #Folder filepath for storage
-        self.create_file(folder, str(call).capitalize(), response) #Create data file within folder
+        if "/" in call:
+            self.create_file(folder, str(call).capitalize().rsplit("/", 1)[1], response) #Create data file within folder
+        else:
+            self.create_file(folder, str(call).capitalize(), response)
 
     def get_status(self):
-        self.download_data(self.sport_folder,'status')
+        self.download_data(self.sport_folder,"status")
 
     def get_leagues(self):
-        self.download_data(self.sport_folder,'leagues')
+        self.download_data(self.sport_folder,"leagues")
     
     def get_seasons(self):
-        self.download_data(self.sport_folder,'seasons')
+        if self.sport == "football":
+            self.download_data(self.sport_folder,"leagues/seasons")
+        else:
+            self.download_data(self.sport_folder,"seasons")
 
     def set_up_sport(self):
         self.create_folder(self.sport_folder)
