@@ -1,3 +1,15 @@
 Data_Download/key.py
 node_modules
-Sports_Data
+Data_Download/Sports_Data/
+Data_Download/Sports_Data/afl/Status/Status.json
+Data_Download/Sports_Data/american-football/Status/Status.json
+Data_Download/Sports_Data/baseball/Status/Status.json
+Data_Download/Sports_Data/basketball/Status/Status.json
+Data_Download/Sports_Data/football/Status/Status.json
+Data_Download/Sports_Data/formula-1/Status/Status.json
+Data_Download/Sports_Data/handball/Status/Status.json
+Data_Download/Sports_Data/hockey/Status/Status.json
+Data_Download/Sports_Data/mma/Status/Status.json
+Data_Download/Sports_Data/nba/Status/Status.json
+Data_Download/Sports_Data/rugby/Status/Status.json
+Data_Download/Sports_Data/volleyball/Status/Status.json
