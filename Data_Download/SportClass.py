@@ -43,8 +43,8 @@ class Sport(object):
         response = self.call_API(url) #Get data
         return(response)
         
-    def download_data(self, call):
-        response = self.API_request(call)
+    def download_data(self, call, qualifiers=""):
+        response = self.API_request(call, qualifiers)
         folder = self.sport_folder+"/"+str(call).capitalize() #Folder filepath for storage
         self.create_file(self.create_folder(folder), str(call).capitalize(), response) #Create data file within folder
 
