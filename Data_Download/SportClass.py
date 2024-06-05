@@ -38,8 +38,8 @@ class Sport(object):
         response = requests.request("GET", url, headers=self.headers, data=self.payload).json()
         return(response)
     
-    def API_request(self, call):
-        url = self.url+"/"+call #Set URL for API
+    def API_request(self, call, qualifiers=""):
+        url = self.url+"/"+call+"?"+qualifiers #Set URL for API
         response = self.call_API(url) #Get data
         return(response)
         
