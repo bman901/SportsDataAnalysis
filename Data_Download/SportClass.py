@@ -30,7 +30,7 @@ class Sport(object):
         
     def create_file(self, path, filename, result):
         fn = filename+".json" #set up json file name
-        filepath = path / fn #set file filepath
+        filepath = path+"/"+fn #set file filepath
         with open(filepath, "w", encoding='utf-8') as f:
             json.dump(result, f, ensure_ascii=False, indent=4) #create file
 
@@ -49,16 +49,16 @@ class Sport(object):
         self.create_file(folder, str(call).capitalize(), response) #Create data file within folder
 
     def get_status(self):
-        folder = self.sport_folder+"/"
-        self.download_data(folder, 'status')
+        self.download_data(self.sport_folder,'status')
 
     def get_leagues(self):
-        self.download_data(self.sport_folder+"/",'leagues')
+        self.download_data(self.sport_folder,'leagues')
     
     def get_seasons(self):
-        self.download_data(self.sport_folder+"/",'seasons')
+        self.download_data(self.sport_folder,'seasons')
 
     def set_up_sport(self):
+        self.create_folder(self.sport_folder)
         self.get_status()
-        # self.get_leagues()
-        # self.get_seasons()
+        self.get_leagues()
+        self.get_seasons()
