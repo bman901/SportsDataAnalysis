@@ -1,13 +1,14 @@
-import Tools.APICaller.key as key, requests
+import Tools.APICaller.key as key
+import requests
+from Tools.Sports.sportclass import Sport as Class
 
 from Tools.FileManager import manager
 
-class APICall(object):
+class APICall(Class):
     def __init__(self, sport, version):
-        self.sport = sport
-        self.version = version
+        super().__init__(sport,version)
         self.url = "https://"+self.version+"."+self.sport+".api-sports.io"
-        self.sport_folder = "Data_Download/Sports_Data/"+str(self.sport).capitalize()
+        self.sport_folder = "Sports_Data/"+str(self.sport).capitalize()
         self.payload={}
         self.headers = {
             'x-apisports-key': key.API_key

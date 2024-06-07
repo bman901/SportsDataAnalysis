@@ -1,11 +1,11 @@
 import pathlib, json
+from Tools.Sports.sportclass import Sport as Class
 
 from Tools.APICaller import caller
 
-class FileManager(object):
+class FileManager(Class):
     def __init__(self, sport, version):
-        self.sport = sport
-        self.version = version
+        super().__init__(sport, version)
 
     def create_folder(self, folder):
         path = pathlib.Path(folder) #set folder filepath
@@ -25,3 +25,11 @@ class FileManager(object):
             self.create_file(folder, str(call).capitalize().rsplit("/", 1)[1], response) #Set the filename to anything beyond the '/' in the call, then create data file
         else:
             self.create_file(folder, str(call).capitalize(), response) #Create data file within folder
+
+    def set_up_sport(self):
+        API = caller.APICall(self.sport, self.version)
+        getfolder = str(API.get_folder())
+        self.create_folder(getfolder)
+        API.get_status()
+        API.get_leagues()
+        API.get_seasons()

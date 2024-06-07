@@ -1,6 +1,3 @@
-from Tools.FileManager import manager
-from Tools.APICaller import caller
-
 class Sport(object):
     def __init__(self, sport, version):
         self.sport = sport
@@ -17,12 +14,3 @@ class Sport(object):
 
     def set_version(self, version):
         self.version = version
-
-    def set_up_sport(self):
-        API = caller.APICall(self.sport, self.version)
-        foldermaker = manager.FileManager(self.sport, self.version)
-        getfolder = str(API.get_folder)
-        foldermaker.create_folder(getfolder)
-        API.get_status()
-        API.get_leagues()
-        API.get_seasons()
