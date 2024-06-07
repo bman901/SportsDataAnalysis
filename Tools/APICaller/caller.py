@@ -13,6 +13,9 @@ class APICall(object):
             'x-apisports-key': key.API_key
         }
 
+    def get_folder(self):
+        return(self.sport_folder)
+
     def call_API(self, url):
         response = requests.request("GET", url, headers=self.headers, data=self.payload).json()
         return(response)
@@ -23,13 +26,16 @@ class APICall(object):
         return(response)
         
     def get_status(self):
-        manager.FileManager.download_data(self.sport_folder,"status")
+        filemanager = manager.FileManager(self.sport, self.version)
+        filemanager.download_data(self.sport_folder,"status")
 
     def get_leagues(self):
-        manager.FileManager.download_data(self.sport_folder,"leagues")
+        filemanager = manager.FileManager(self.sport, self.version)
+        filemanager.download_data(self.sport_folder,"leagues")
     
     def get_seasons(self):
+        filemanager = manager.FileManager(self.sport, self.version)
         if self.sport == "football":
-            manager.FileManager.download_data(self.sport_folder,"leagues/seasons")
+            filemanager.download_data(self.sport_folder,"leagues/seasons")
         else:
-            manager.FileManager.download_data(self.sport_folder,"seasons")
+            filemanager.download_data(self.sport_folder,"seasons")

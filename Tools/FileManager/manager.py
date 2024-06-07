@@ -19,7 +19,8 @@ class FileManager(object):
             json.dump(result, f, ensure_ascii=False, indent=4) #create file
 
     def download_data(self, folder, call, qualifiers=""):
-        response = caller.APICall.API_request(call, qualifiers)
+        API = caller.APICall(self.sport, self.version)
+        response = API.API_request(call, qualifiers)
         if "/" in call:
             self.create_file(folder, str(call).capitalize().rsplit("/", 1)[1], response) #Set the filename to anything beyond the '/' in the call, then create data file
         else:

@@ -19,7 +19,10 @@ class Sport(object):
         self.version = version
 
     def set_up_sport(self):
-        manager.FileManager.create_folder(caller.APICall.sport_folder)
-        caller.APICall.get_status()
-        caller.APICall.get_leagues()
-        caller.APICall.get_seasons()
+        API = caller.APICall(self.sport, self.version)
+        foldermaker = manager.FileManager(self.sport, self.version)
+        getfolder = str(API.get_folder)
+        foldermaker.create_folder(getfolder)
+        API.get_status()
+        API.get_leagues()
+        API.get_seasons()

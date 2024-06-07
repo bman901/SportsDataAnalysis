@@ -7,3 +7,4 @@ def download_data():
         sport.set_up_sport()
 
 download_data()
+        
