@@ -46,9 +46,9 @@ class DownloadManager(SportClass):
         self.get_leagues()
         self.get_seasons()
 
-    def download_seasons(self, league, season):
+    def download_seasons(self, name, id, season):
         # Downloads the game data per season
         fm = FileManager(self.get_sport(), self.get_version())
-        folder = self.get_folder()+"/"+str(league)+"/"+str(season)
+        folder = self.get_folder()+"/"+str(name)+"/"+str(season)
         fm.create_folder(folder)
-        self.download_data(folder, "games", "league="+str(league)+"&season="+str(season))
+        self.download_data(folder, "games", "league="+str(id)+"&season="+str(season))

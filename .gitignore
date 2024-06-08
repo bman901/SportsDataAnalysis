@@ -1,4 +1,5 @@
 node_modules
+Sports_Data
 APICaller/key.py
 Sports_Data/Afl/Leagues.json
 Sports_Data/Afl/Seasons.json
@@ -36,3 +37,19 @@ Sports_Data/Rugby/Status.json
 Sports_Data/Volleyball/Leagues.json
 Sports_Data/Volleyball/Seasons.json
 Sports_Data/Volleyball/Status.json
+Sports_Data/Afl/1/2021/Games.json
+Sports_Data/Afl/AFL Premiership/2011/Games.json
+Sports_Data/Afl/AFL Premiership/2012/Games.json
+Sports_Data/Afl/AFL Premiership/2013/Games.json
+Sports_Data/Afl/AFL Premiership/2014/Games.json
+Sports_Data/Afl/AFL Premiership/2015/Games.json
+Sports_Data/Afl/AFL Premiership/2016/Games.json
+Sports_Data/Afl/AFL Premiership/2017/Games.json
+Sports_Data/Afl/AFL Premiership/2018/Games.json
+Sports_Data/Afl/AFL Premiership/2019/Games.json
+Sports_Data/Afl/AFL Premiership/2020/Games.json
+Sports_Data/Afl/AFL Premiership/2021/Games.json
+Sports_Data/Afl/AFL Premiership/2022/Games.json
+Sports_Data/Afl/AFL Premiership/2023/Games.json
+Sports_Data/Afl/AFL Premiership/2024/Games.json
+Sports_Data/Afl/[1]/2021/Games.json
