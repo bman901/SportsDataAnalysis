@@ -12,11 +12,12 @@ class APICall(SportClass):
         }
 
     def call_API(self, url):
+        # Calls the API based on the URL provided
         s = requests.Session()
         response = s.request("GET", url, headers=self.headers, data=self.payload).json()
         return(response)
     
-    def API_request(self, call, qualifiers=""):
+    def API_URL(self, call, qualifiers=""):
+        # Sets up the URL for the API
         url = self.url+"/"+call+"?"+qualifiers #Set URL for API
-        response = self.call_API(url) #Get data
-        return(response)
+        return(url)

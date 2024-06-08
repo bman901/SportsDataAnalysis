@@ -13,7 +13,11 @@ def get_seasons():
     for value in sports.leagues_dic:
         sport = SportClass.Sport(value, sports.versions_dic[value])
         dm = DownloadManager(sport.get_sport(), sport.get_version())
-        dm.download_seasons(1,2021)
+        for value in sports.leagues_dic[value]:
+            # name = get_league_name(value)
+            # for year in SEASONSLIST
+                # dm.download_seasons(name,year)
+            dm.download_seasons(value,2021)
 
 def download_data():
     t1_start = perf_counter()
