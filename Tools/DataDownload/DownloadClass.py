@@ -1,7 +1,5 @@
 from Tools.Sports.SportClass import Sport as SportClass
-
 from Tools.APICaller import APIClass
-
 from Tools.FileManager.FileClass import FileManager
 
 class DownloadManager(SportClass):
