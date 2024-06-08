@@ -10,7 +10,7 @@ def file_setup():
         dm = DownloadManager(sport.get_sport(), sport.get_version())
         dm.set_up_sport()
 
-def download_seasons():
+def download_season_data():
     for value in sports.leagues_dic:
         sport = SportsData(value, sports.versions_dic[value])
         dm = DownloadManager(sport.get_sport(), sport.get_version())
@@ -28,7 +28,7 @@ def download_data():
     t1_start = perf_counter()
     print('Downloading data...')
     file_setup()
-    download_seasons()
+    download_season_data()
     t2_end = perf_counter()
     time_elapsed = round(t2_end - t1_start,2)
     print('Download complete in '+str(time_elapsed)+' seconds')
