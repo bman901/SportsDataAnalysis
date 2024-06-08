@@ -26,15 +26,21 @@ class DownloadManager(SportClass):
         self.download_data(self.sport_folder,"leagues")
     
     def get_seasons(self):
-        if self.sport == "football":
+        if self.get_sport() == "football":
             self.download_data(self.sport_folder,"leagues/seasons")
         else:
             self.download_data(self.sport_folder,"seasons")
 
     def set_up_sport(self):
-        fm = FileManager(self.sport, self.version)
+        fm = FileManager(self.get_sport(), self.get_version())
         folder = self.get_folder()
         fm.create_folder(folder)
         self.get_status()
         self.get_leagues()
         self.get_seasons()
+
+    def download_seasons(self, league, season):
+        fm = FileManager(self.get_sport(), self.get_version())
+        folder = self.get_folder()+"/"+str(league)+"/"+str(season)
+        fm.create_folder(folder)
+        self.download_data(folder, "games", "league="+str(league)+"&season="+str(season))
