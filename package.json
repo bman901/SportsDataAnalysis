@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "pathlib": "^0.1.2",
-    "requests": "^0.3.0"
+    "requests": "^0.3.0",
+    "tqdm": "^2.0.3"
   }
 }
