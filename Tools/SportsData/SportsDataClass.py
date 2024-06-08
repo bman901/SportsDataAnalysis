@@ -11,14 +11,23 @@ class SportsData(SportClass):
     leagues = API.call_API(url)
     return(leagues)
   
-  def get_seasons(self):
+  def get_seasons(self, id):
     API = APICall(self.get_sport(), self.get_version())
-    if self.get_sport() == "football":
-      url = API.API_URL("leagues/seasons")
-    else:
+    if self.get_sport() == "AFL":
       url = API.API_URL("seasons")
-    seasons = API.call_API(url)
-    return(seasons)
+      seasons = API.call_API(url)
+      return(seasons)
+    else:
+      data = self.get_leagues()
+      for value in range(len(data["response"])):
+        if self.get_sport == "football":
+          if data["response"][value]["league"]["id"] == id:
+            seasons = data["response"][value]["league"]["seasons"]
+            return(seasons)
+        else:
+          if data["response"][value]["id"] == id:
+            seasons = data["response"][value]["seasons"]
+            return(seasons)
 
   def get_league_name(self, id):
     data = self.get_leagues()

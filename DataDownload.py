@@ -16,8 +16,13 @@ def download_seasons():
         dm = DownloadManager(sport.get_sport(), sport.get_version())
         for id in sports.leagues_dic[value]:
             name = sport.get_league_name(id)
-            for year in sport.get_seasons()["response"]:
-                dm.download_seasons(name,id,year)
+            if sport.get_sport() == "AFL":
+                for year in sport.get_seasons(id):
+                    dm.download_seasons(name,id,year)
+            else:
+                for i in range(len(sport.get_seasons(id))):
+                    year = sport.get_seasons(id)[i]["season"]
+                    dm.download_seasons(name,id,year)
 
 def download_data():
     t1_start = perf_counter()
