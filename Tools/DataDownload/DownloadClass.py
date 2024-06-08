@@ -13,7 +13,7 @@ class DownloadManager(SportClass):
         return(self.sport_folder)
 
     def download_data(self, folder, call, qualifiers=""):
-        API = APIClass.APICall(self.sport, self.version)
+        API = APIClass.APICall(self.get_sport(), self.get_version())
         fm = FileManager(self.sport, self.version)
         response = API.API_request(call, qualifiers)
         if "/" in call:
