@@ -46,9 +46,18 @@ class DownloadManager(SportClass):
         self.get_leagues()
         self.get_seasons()
 
-    def download_seasons(self, name, id, season):
+    def download_games(self, name, id, season):
         # Downloads the game data per season
         fm = FileManager(self.get_sport(), self.get_version())
         folder = self.get_folder()+"/"+str(name)+"/"+str(season)
         fm.create_folder(folder)
         self.download_data(folder, "games", "league="+str(id)+"&season="+str(season))
+        print('Games downloaded for '+name+" - "+str(season))
+
+    def download_odds(self, name, id, season):
+        # Downloads the odds data per season
+        fm = FileManager(self.get_sport(), self.get_version())
+        folder = self.get_folder()+"/"+str(name)+"/"+str(season)
+        fm.create_folder(folder)
+        self.download_data(folder, "odds", "league="+str(id)+"&season="+str(season))
+        print('Odds downloaded for '+name+" - "+str(season))
