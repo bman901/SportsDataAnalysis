@@ -13,9 +13,9 @@ class SportsData(SportClass):
   
   def get_seasons(self, id):
     API = APICall(self.get_sport(), self.get_version())
-    if self.get_sport() == "AFL":
+    if self.get_sport() == "afl":
       url = API.API_URL("seasons")
-      seasons = API.call_API(url)
+      seasons = API.call_API(url)["response"]
       return(seasons)
     else:
       data = self.get_leagues()
