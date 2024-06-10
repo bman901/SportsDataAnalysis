@@ -1,7 +1,6 @@
 from Tools.Sports import SportClass, sports
 from Tools.DataDownload.DownloadClass import DownloadManager
 from Tools.SportsData.SportsDataClass import SportsData
-from Tools.APICaller.APIClass import APICall
 
 from time import perf_counter
 
@@ -38,13 +37,4 @@ def download_data():
     time_elapsed = round(t2_end - t1_start,2)
     print('Download complete in '+str(time_elapsed)+' seconds')
 
-# download_data()
-    
-# TESTING
-a = APICall('afl','v1')
-
-url = a.API_URL('odds','game=97')
-
-odds = a.call_API(url)
-
-print(odds)
+download_data()
