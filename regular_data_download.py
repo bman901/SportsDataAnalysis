@@ -7,7 +7,7 @@ import pandas as pd
 
 from Tools.APICaller.api_class import APICall
 from Tools.Sports import sport_class, sports_dicts
-from Tools.SportsData.sports_data_class import SportsData
+from Tools.DataAccess.sports_data_class import SportsData
 
 
 def save_data():
@@ -17,26 +17,22 @@ def save_data():
     two_days_ago = datetime.now() - timedelta(2)
     date = "2024-06-08"
     # date = datetime.strftime(two_days_ago, "%Y-%m-%d")
-    current_season = 2024  # Here as a test, will need to change to dynamic
+    # current_season = 2024  # Here as a test, will need to change to dynamic
 
     for sport, leagues in sports_dicts.leagues_dict.items():
         sport = SportsData(sport, sports_dicts.versions_dict[sport])
-        dm = APICall(sport.get_sport(), sport.get_version())
+        # dm = APICall(sport.get_sport(), sport.get_version())
         for i in leagues:
             league_id = i["league_id"]
             name = i["league_name"]
             current_season = i["current_season"]
-            url = dm.api_url(
-                "games",
-                f"league={league_id}&season={current_season}&date={date}",
-            )
-            data = dm.call_api(url)
+            data = sport.get_games(league_id, current_season, date)
             for result in range(len(data["response"])):
                 if data["response"][result]["status"]["short"] != "FT":
                     pass
                 else:
                     game_id = data["response"][result]["game"]["id"]
-                    teams = home_team_id = data["response"][result]["teams"]
+                    teams = data["response"][result]["teams"]
                     home_team_id = teams["home"]["id"]
                     home_team_name = teams["home"]["name"]
                     away_team_id = teams["away"]["id"]

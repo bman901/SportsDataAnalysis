@@ -4,7 +4,7 @@ from time import perf_counter
 
 from Tools.Sports import sport_class, sports_dicts
 from Tools.DataDownload.download_class import DownloadManager
-from Tools.SportsData.sports_data_class import SportsData
+from Tools.DataAccess.sports_data_class import SportsData
 
 
 def file_setup():
