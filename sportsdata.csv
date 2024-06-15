@@ -1,0 +1,3 @@
+sport,game_id,league_id,league_name,season,home_team_id,home_team_name,away_team_id,away_team_name,result,odds_home,odds_away,odds_draw,favourite
+afl,2860,1,AFL Premiership,2024,16,Western Bulldogs,6,Fremantle Dockers,home,1.764,2.022,10000,home
+afl,2861,1,AFL Premiership,2024,12,Richmond Tigers,8,Hawthorn Hawks,away,2.75,1.448,10000,home
