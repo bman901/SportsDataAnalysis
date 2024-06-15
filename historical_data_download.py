@@ -27,7 +27,7 @@ def download_season_data():
         dm = DownloadManager(sport.get_sport(), sport.get_version())
         for i in leagues:
             league_id = i["league_id"]
-            name = sport.get_league_name(league_id)
+            name = sport.get_league_name_by_api(league_id)
             if sport.get_sport() == "afl":
                 for year in sport.get_seasons(league_id):
                     dm.download_games(name, league_id, year)

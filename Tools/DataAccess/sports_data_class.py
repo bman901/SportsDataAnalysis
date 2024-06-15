@@ -4,6 +4,7 @@ import statistics
 import pandas as pd
 
 from Tools.Sports.sport_class import Sport as SportClass
+from Tools.Sports.sports_dicts import leagues_dict
 from Tools.APICaller.api_class import APICall
 
 
@@ -38,7 +39,14 @@ class SportsData(SportClass):
                         return seasons
 
     def get_league_name(self, league_id):
-        """Gets the league name for a particular league"""
+        """Gets the league name for a particular league by using the leagues_dict"""
+        sport = self.get_sport()
+        for i in range(len(leagues_dict[sport])):
+            if leagues_dict[sport][i]["league_id"] == league_id:
+                return leagues_dict[sport][i]["league_name"]
+
+    def get_league_name_by_api(self, league_id):
+        """Gets the league name for a particular league via API"""
         data = self.get_leagues()
         for value in range(len(data["response"])):
             if self.get_sport == "football":
