@@ -5,7 +5,7 @@ from Tools.Sports.sports_dicts import versions_dict
 import pandas as pd
 
 
-def run_analysis(sport, league_id, season):
+def find_percentage_favourite(sport, league_id, season):
     df = pd.read_csv("sportsdata.csv")
     data_analysis = DataAnalysis(df)
     percentage = data_analysis.percentage_fav_win(sport, league_id, season)
@@ -16,4 +16,4 @@ def run_analysis(sport, league_id, season):
     )
 
 
-run_analysis("afl", 1, 2024)
+find_percentage_favourite("afl", 1, 2024)

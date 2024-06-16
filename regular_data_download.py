@@ -17,6 +17,7 @@ def save_data():
 
     for sport, leagues in sports_dicts.leagues_dict.items():
         sport = SportsData(sport, sports_dicts.versions_dict[sport])
+        count = 0
         for i in leagues:
             league_id = i["league_id"]
             name = i["league_name"]
@@ -28,8 +29,9 @@ def save_data():
                 )
                 data_frame = sport.get_dataframe(data)
                 sport.save_dataframe(data_frame)
+                count += 1
 
-        print("Save complete")
+        print(f"Save complete, {count} games downloaded")
 
 
 save_data()
