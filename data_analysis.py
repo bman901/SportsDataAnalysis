@@ -7,9 +7,11 @@ import pandas as pd
 
 def find_percentage_favourite(sport, league_id, season):
     df = pd.read_csv("sportsdata.csv")
-    data_analysis = DataAnalysis(df)
-    percentage = data_analysis.percentage_fav_win(sport, league_id, season)
     sport_data = SportsData(sport, versions_dict[sport])
+    data_analysis = DataAnalysis(
+        sport_data.get_sport(), sport_data.get_version(), df, league_id, season
+    )
+    percentage = data_analysis.percentage_fav_win()
     league_name = sport_data.get_league_name(league_id)
     print(
         f"In the {season} season of {sport}'s {league_name}, the favourite won {percentage:.0%} of the time"
