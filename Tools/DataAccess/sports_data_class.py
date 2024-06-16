@@ -195,5 +195,6 @@ class SportsData(SportClass):
 
     def save_dataframe(self, dataframe):
         df = pd.read_csv("sportsdata.csv")
-        newdf = pd.concat([df, dataframe], ignore_index=True)
-        newdf.to_csv("sportsdata.csv", index=False)
+        if dataframe["game_id"][0] not in df.values:
+            newdf = pd.concat([df, dataframe], ignore_index=True)
+            newdf.to_csv("sportsdata.csv", index=False)
