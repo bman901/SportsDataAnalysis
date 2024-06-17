@@ -1,11 +1,13 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
 from Tools.DataAnalysis.data_analysis_class import DataAnalysis
 from Tools.DataAccess.sports_data_class import SportsData
 from Tools.Sports import sports_dicts
 
-import pandas as pd
 
-
-def find_percentage_favourite():
+def report_percentage_favourite():
     df = pd.read_csv("sportsdata.csv")
     for sport, leagues in sports_dicts.leagues_dict.items():
         sport_data = SportsData(sport, sports_dicts.versions_dict[sport])
@@ -25,4 +27,27 @@ def find_percentage_favourite():
                 print(f"{sport}'s {league_name} season is yet to start")
 
 
-find_percentage_favourite()
+def plot_percentage_favourite():
+    df = pd.read_csv("sportsdata.csv")
+    x_axis = []
+    y_axis = []
+    for sport, leagues in sports_dicts.leagues_dict.items():
+        sport_data = SportsData(sport, sports_dicts.versions_dict[sport])
+        for i in leagues:
+            league_id = i["league_id"]
+            league_name = i["league_name"]
+            season = i["current_season"]
+            data_analysis = DataAnalysis(
+                sport_data.get_sport(), sport_data.get_version(), df, league_id, season
+            )
+            percentage = data_analysis.percentage_fav_win()
+            if type(percentage) != str:
+                x_axis.append(league_name)
+                y_axis.append(percentage)
+    xpos = np.arange(len(x_axis))
+    plt.xticks(xpos, x_axis)
+    plt.bar(xpos, y_axis)
+    plt.show()
+
+
+# def ten_on_fav():
