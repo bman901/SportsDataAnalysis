@@ -41,9 +41,11 @@ class SportsData(SportClass):
     def get_league_name(self, league_id):
         """Gets the league name for a particular league by using the leagues_dict"""
         sport = self.get_sport()
-        for i in range(len(leagues_dict[sport])):
-            if leagues_dict[sport][i]["league_id"] == league_id:
-                return leagues_dict[sport][i]["league_name"]
+        for data in leagues_dict:
+            if data["sport"] == sport:
+                for i in data["leagues"]:
+                    if i["league_id"] == league_id:
+                        return i["league_name"]
 
     def get_league_name_by_api(self, league_id):
         """Gets the league name for a particular league via API"""

@@ -12,8 +12,8 @@ def file_setup():
     Works through the dictionary in 'sports' to establish which sports to download.
     Then downloads league, seasons and API status data.
     """
-    for sport, version in sports_dicts.versions_dict.items():
-        sport = sport_class.Sport(sport, version)
+    for data in sports_dicts.leagues_dict:
+        sport = sport_class.Sport(data["sport"], data["version"])
         dm = DownloadManager(sport.get_sport(), sport.get_version())
         dm.set_up_sport()
 
@@ -22,10 +22,10 @@ def download_season_data():
     """
     Works through the leagues specified in the leagues dictionary and downloads all season data
     """
-    for sport, leagues in sports_dicts.leagues_dict.items():
-        sport = SportsData(sport, sports_dicts.versions_dict[sport])
+    for data in sports_dicts.leagues_dict:
+        sport = SportsData(data["sport"], data["version"])
         dm = DownloadManager(sport.get_sport(), sport.get_version())
-        for i in leagues:
+        for i in data["leagues"]:
             league_id = i["league_id"]
             name = sport.get_league_name_by_api(league_id)
             if sport.get_sport() == "afl":

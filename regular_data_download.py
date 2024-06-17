@@ -14,11 +14,11 @@ def save_data():
     two_days_ago = datetime.now() - timedelta(2)
     date = datetime.strftime(two_days_ago, "%Y-%m-%d")
 
-    for sport, leagues in sports_dicts.leagues_dict.items():
-        sport = SportsData(sport, sports_dicts.versions_dict[sport])
+    for data in sports_dicts.leagues_dict:
+        sport = SportsData(data["sport"], data["version"])
         count = 0
         saved = 0
-        for i in leagues:
+        for i in data["leagues"]:
             league_id = i["league_id"]
             league_name = i["league_name"]
             current_season = i["current_season"]
