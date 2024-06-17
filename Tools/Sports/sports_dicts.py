@@ -31,39 +31,51 @@ afl_current_season = year
 mlb_current_season = year
 nbaw_current_season = year
 
-leagues_dict = {
-    "afl": [
-        {
-            "league_id": 1,
-            "league_name": "AFL Premiership",
-            "current_season": afl_current_season,
-        }
-    ],
-    "baseball": [
-        {
-            "league_id": 1,
-            "league_name": "MLB",
-            "current_season": mlb_current_season,
-        }
-    ],
-    "basketball": [
-        {
-            "league_id": 1,
-            "league_name": "NBL",
-            "current_season": nbl_current_season,
-        },
-        {
-            "league_id": 12,
-            "league_name": "NBA",
-            "current_season": nba_current_season,
-        },
-        {
-            "league_id": 13,
-            "league_name": "NBA W",
-            "current_season": nbaw_current_season,
-        },
-    ],
-}
+leagues_dict = [
+    {
+        "sport": "afl",
+        "version": "v1",
+        "leagues": [
+            {
+                "league_id": 1,
+                "league_name": "AFL Premiership",
+                "current_season": afl_current_season,
+            }
+        ],
+    },
+    {
+        "sport": "baseball",
+        "version": "v1",
+        "leagues": [
+            {
+                "league_id": 1,
+                "league_name": "MLB",
+                "current_season": mlb_current_season,
+            }
+        ],
+    },
+    {
+        "sport": "basketball",
+        "version": "v1",
+        "leagues": [
+            {
+                "league_id": 1,
+                "league_name": "NBL",
+                "current_season": nbl_current_season,
+            },
+            {
+                "league_id": 12,
+                "league_name": "NBA",
+                "current_season": nba_current_season,
+            },
+            {
+                "league_id": 13,
+                "league_name": "NBA W",
+                "current_season": nbaw_current_season,
+            },
+        ],
+    },
+]
 
 holding_dict = {
     "afl": [
