@@ -198,3 +198,6 @@ class SportsData(SportClass):
         if dataframe["game_id"][0] not in df.values:
             newdf = pd.concat([df, dataframe], ignore_index=True)
             newdf.to_csv("sportsdata.csv", index=False)
+            return 1
+        else:
+            return 0
