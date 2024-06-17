@@ -11,14 +11,12 @@ def report_percentage_favourite():
     df = pd.read_csv("sportsdata.csv")
     for data in leagues_dict:
         sport = data["sport"]
-        sport_data = SportsData(sport, data["version"])
+        version = data["version"]
         for i in data["leagues"]:
             league_id = i["league_id"]
             league_name = i["league_name"]
             season = i["current_season"]
-            data_analysis = DataAnalysis(
-                sport_data.get_sport(), sport_data.get_version(), df, league_id, season
-            )
+            data_analysis = DataAnalysis(sport, version, df, league_id, season)
             percentage = data_analysis.percentage_fav_win()
             if type(percentage) != str:
                 print(
@@ -34,14 +32,12 @@ def plot_percentage_favourite():
     y_axis = []
     for data in leagues_dict:
         sport = data["sport"]
-        sport_data = SportsData(sport, data["version"])
+        version = data["version"]
         for i in data["leagues"]:
             league_id = i["league_id"]
             league_name = i["league_name"]
             season = i["current_season"]
-            data_analysis = DataAnalysis(
-                sport_data.get_sport(), sport_data.get_version(), df, league_id, season
-            )
+            data_analysis = DataAnalysis(sport, version, df, league_id, season)
             percentage = data_analysis.percentage_fav_win()
             if type(percentage) != str:
                 x_axis.append(league_name)
@@ -59,14 +55,12 @@ def bet_on_fav(bet=10):
     df = pd.read_csv("sportsdata.csv")
     for data in leagues_dict:
         sport = data["sport"]
-        sport_data = SportsData(sport, data["version"])
+        version = data["version"]
         for i in data["leagues"]:
             league_id = i["league_id"]
             league_name = i["league_name"]
             season = i["current_season"]
-            data_analysis = DataAnalysis(
-                sport_data.get_sport(), sport_data.get_version(), df, league_id, season
-            )
+            data_analysis = DataAnalysis(sport, version, df, league_id, season)
             total_games = data_analysis.count_dataframe_length(df)
             if total_games == 0:
                 pass
