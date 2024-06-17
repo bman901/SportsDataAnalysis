@@ -17,9 +17,12 @@ def find_percentage_favourite():
                 sport_data.get_sport(), sport_data.get_version(), df, league_id, season
             )
             percentage = data_analysis.percentage_fav_win()
-            print(
-                f"In the {season} season of {sport}'s {league_name}, the favourite won {percentage:.0%} of the time"
-            )
+            if type(percentage) != str:
+                print(
+                    f"In the {season} season of {sport}'s {league_name}, the favourite won {percentage:.0%} of the time"
+                )
+            else:
+                print(f"{sport}'s {league_name} season is yet to start")
 
 
 find_percentage_favourite()

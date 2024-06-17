@@ -3,7 +3,7 @@
 from time import perf_counter
 
 from Tools.Sports import sport_class, sports_dicts
-from Tools.DataDownload.download_class import DownloadManager
+from Tools.HistoricDataDownload.download_class import DownloadManager
 from Tools.DataAccess.sports_data_class import SportsData
 
 

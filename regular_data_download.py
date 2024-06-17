@@ -23,7 +23,7 @@ def save_data():
             league_name = i["league_name"]
             current_season = i["current_season"]
             games = sport.get_games(league_id, current_season, date)
-            for result in range(len(games["response"]) - 1):
+            for result in range(len(games["response"])):
                 data = sport.get_dataframe_data(
                     games, result, league_id, league_name, current_season
                 )
@@ -31,7 +31,9 @@ def save_data():
                 saved += sport.save_dataframe(data_frame)
                 count += 1
 
-        print(f"Save complete: {count} games found, {saved} downloaded")
+        print(
+            f"Save complete: for {sport.get_sport()} {count} games found, {saved} downloaded"
+        )
 
 
 save_data()

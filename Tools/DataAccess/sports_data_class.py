@@ -156,7 +156,10 @@ class SportsData(SportClass):
         if games["response"][index]["status"]["short"] != "FT":
             pass
         else:
-            game_id = games["response"][index]["game"]["id"]
+            if self.get_sport() == "afl":
+                game_id = games["response"][index]["game"]["id"]
+            else:
+                game_id = games["response"][index]["id"]
             odds = self.get_odds(game_id)
             if odds["results"] != 0:
                 teams = games["response"][index]["teams"]
@@ -195,9 +198,12 @@ class SportsData(SportClass):
 
     def save_dataframe(self, dataframe):
         df = pd.read_csv("sportsdata.csv")
-        if dataframe["game_id"][0] not in df.values:
-            newdf = pd.concat([df, dataframe], ignore_index=True)
-            newdf.to_csv("sportsdata.csv", index=False)
-            return 1
+        if not dataframe.empty:
+            if dataframe["game_id"][0] not in df.values:
+                newdf = pd.concat([df, dataframe], ignore_index=True)
+                newdf.to_csv("sportsdata.csv", index=False)
+                return 1
+            else:
+                return 0
         else:
             return 0
