@@ -74,3 +74,17 @@ class DataAnalysis(SportClass):
         else:
             percentage = "No games played"
         return percentage
+
+    def get_winning_fav_odds_total(self, data_frame):
+        df = pd.DataFrame(data=data_frame)
+        sport = self.get_sport()
+        league_id = self.get_league_id()
+        season = self.get_season()
+        df_sport = df[df["sport"] == sport]
+        df_league = df_sport[df_sport["league_id"] == league_id]
+        df_season = df_league[df_league["season"] == season]
+        df_fav_winners = self.compare_equal(df_season, "result", "favourite")
+        df_odds = df_fav_winners[["odds_home", "odds_away", "odds_draw"]]
+        df_min_odds = df_odds.min(axis=1)
+        sum_min_odds = df_min_odds.sum()
+        return sum_min_odds
