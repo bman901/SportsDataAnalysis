@@ -69,5 +69,8 @@ class DataAnalysis(SportClass):
         equal = self.compare_equal(df, "result", "favourite")
         favourite_wins = self.count_dataframe_length(equal)
         total_games = self.count_dataframe_length(df)
-        percentage = favourite_wins / total_games
+        if total_games > 0:
+            percentage = favourite_wins / total_games
+        else:
+            percentage = "No games played"
         return percentage

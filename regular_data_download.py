@@ -12,26 +12,28 @@ def save_data():
     Works through the leagues specified in the leagues dictionary and downloads games and odds from two days ago
     """
     two_days_ago = datetime.now() - timedelta(2)
-    # date = "2024-06-15" (Test)
     date = datetime.strftime(two_days_ago, "%Y-%m-%d")
 
     for sport, leagues in sports_dicts.leagues_dict.items():
         sport = SportsData(sport, sports_dicts.versions_dict[sport])
         count = 0
+        saved = 0
         for i in leagues:
             league_id = i["league_id"]
-            name = i["league_name"]
+            league_name = i["league_name"]
             current_season = i["current_season"]
             games = sport.get_games(league_id, current_season, date)
             for result in range(len(games["response"])):
                 data = sport.get_dataframe_data(
-                    games, result, league_id, name, current_season
+                    games, result, league_id, league_name, current_season
                 )
                 data_frame = sport.get_dataframe(data)
-                sport.save_dataframe(data_frame)
+                saved += sport.save_dataframe(data_frame)
                 count += 1
 
-        print(f"Save complete, {count} games downloaded")
+        print(
+            f"Save complete: for {sport.get_sport()} {count} games found, {saved} downloaded"
+        )
 
 
 save_data()

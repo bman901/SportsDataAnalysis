@@ -1,4 +1,15 @@
 sport,game_id,league_id,league_name,season,home_team_id,home_team_name,away_team_id,away_team_name,result,odds_home,odds_away,odds_draw,favourite
+afl,2859,1,AFL Premiership,2024,2,Brisbane Lions,13,St Kilda Saints,home,1.124,5.843,10000,home
 afl,2860,1,AFL Premiership,2024,16,Western Bulldogs,6,Fremantle Dockers,home,1.764,2.022,10000,home
 afl,2861,1,AFL Premiership,2024,12,Richmond Tigers,8,Hawthorn Hawks,away,2.75,1.448,10000,home
-afl,2859,1,AFL Premiership,2024,2,Brisbane Lions,13,St Kilda Saints,home,1.124,5.843,10000,home
+baseball,154265,1,MLB,2024,15,Houston Astros,12,Detroit Tigers,home,1.8315384615384616,2.0015384615384617,10000,home
+baseball,154272,1,MLB,2024,20,Milwaukee Brewers,8,Cincinnati Reds,away,1.58,2.443846153846154,10000,home
+baseball,154273,1,MLB,2024,22,Minnesota Twins,26,Oakland Athletics,home,1.5561538461538462,2.493076923076923,10000,home
+baseball,154274,1,MLB,2024,10,Colorado Rockies,28,Pittsburgh Pirates,away,1.9907692307692304,1.846923076923077,10000,home
+baseball,154264,1,MLB,2024,2,Arizona Diamondbacks,7,Chicago White Sox,home,1.5115384615384615,2.6253846153846156,10000,home
+baseball,154275,1,MLB,2024,18,Los Angeles Dodgers,16,Kansas City Royals,home,1.6507692307692308,2.286923076923077,10000,home
+baseball,154276,1,MLB,2024,32,Seattle Mariners,35,Texas Rangers,home,1.6976923076923076,2.1953846153846155,10000,home
+baseball,154277,1,MLB,2024,31,San Francisco Giants,17,Los Angeles Angels,away,1.6392307692307693,2.3053846153846154,10000,home
+baseball,154279,1,MLB,2024,6,Chicago Cubs,33,St.Louis Cardinals,home,1.5446153846153847,2.5138461538461536,10000,home
+basketball,384840,13,NBA W,2024,165,Dallas Wings W,164,Connecticut Sun W,away,3.3275,1.338125,10000,home
+basketball,384841,13,NBA W,2024,167,Las Vegas Aces W,170,New York Liberty W,away,1.735625,2.125,10000,home

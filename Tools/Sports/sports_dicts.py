@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 versions_dict = {
     "afl": "v1",
@@ -38,6 +38,30 @@ leagues_dict = {
             "league_name": "AFL Premiership",
             "current_season": afl_current_season,
         }
+    ],
+    "baseball": [
+        {
+            "league_id": 1,
+            "league_name": "MLB",
+            "current_season": mlb_current_season,
+        }
+    ],
+    "basketball": [
+        {
+            "league_id": 1,
+            "league_name": "NBL",
+            "current_season": nbl_current_season,
+        },
+        {
+            "league_id": 12,
+            "league_name": "NBA",
+            "current_season": nba_current_season,
+        },
+        {
+            "league_id": 13,
+            "league_name": "NBA W",
+            "current_season": nbaw_current_season,
+        },
     ],
 }
 
