@@ -13,3 +13,17 @@ baseball,154277,1,MLB,2024,31,San Francisco Giants,17,Los Angeles Angels,away,1.
 baseball,154279,1,MLB,2024,6,Chicago Cubs,33,St.Louis Cardinals,home,1.5446153846153847,2.5138461538461536,10000,home
 basketball,384840,13,NBA W,2024,165,Dallas Wings W,164,Connecticut Sun W,away,3.3275,1.338125,10000,home
 basketball,384841,13,NBA W,2024,167,Las Vegas Aces W,170,New York Liberty W,away,1.735625,2.125,10000,home
+afl,2863,1,AFL Premiership,2024,10,North Melbourne Kangaroos,4,Collingwood Magpies,away,6.929,1.096,10000,home
+afl,2864,1,AFL Premiership,2024,18,Greater Western Sydney Giants,11,Port Adelaide Power,home,1.526,2.471,10000,home
+baseball,154291,1,MLB,2024,10,Colorado Rockies,28,Pittsburgh Pirates,home,2.4015384615384616,1.596923076923077,10000,home
+baseball,154292,1,MLB,2024,18,Los Angeles Dodgers,16,Kansas City Royals,away,1.4076923076923076,3.0115384615384615,10000,home
+baseball,154281,1,MLB,2024,2,Arizona Diamondbacks,7,Chicago White Sox,away,1.5846153846153848,2.4269230769230767,10000,home
+baseball,154300,1,MLB,2024,6,Chicago Cubs,33,St.Louis Cardinals,away,1.7561538461538462,2.1130769230769233,10000,home
+baseball,154293,1,MLB,2024,3,Atlanta Braves,34,Tampa Bay Rays,away,1.8053846153846151,2.043076923076923,10000,home
+baseball,154294,1,MLB,2024,4,Baltimore Orioles,27,Philadelphia Phillies,home,1.7223076923076923,2.166153846153846,10000,home
+baseball,154295,1,MLB,2024,37,Washington Nationals,19,Miami Marlins,home,1.816923076923077,2.0276923076923077,10000,home
+baseball,154296,1,MLB,2024,36,Toronto Blue Jays,9,Cleveland Guardians,home,1.8392307692307692,1.9984615384615383,10000,home
+baseball,154297,1,MLB,2024,24,New York Mets,30,San Diego Padres,home,2.1553846153846155,1.7276923076923076,10000,home
+basketball,384843,13,NBA W,2024,166,Indiana Fever W,163,Chicago Sky W,home,1.6925,2.1906250000000003,10000,home
+basketball,384842,13,NBA W,2024,171,Phoenix Mercury W,172,Seattle Storm W,home,2.319375,1.6225,10000,home
+basketball,384844,13,NBA W,2024,162,Atlanta Dream W,168,Los Angeles Sparks W,home,1.44875,2.7868749999999998,10000,home

@@ -1,48 +1,43 @@
+""" Functions for running the data analysis on all sports """
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
 from Tools.DataAnalysis.data_analysis_class import DataAnalysis
-from Tools.DataAccess.sports_data_class import SportsData
 from Tools.Sports.sports_dicts import leagues_dict
 
 
-def report_percentage_favourite():
+def get_all_sports(data, leagues):
+    """Get all sports"""
     df = pd.read_csv("sportsdata.csv")
+    sport = data["sport"]
+    version = data["version"]
+    league_id = leagues["league_id"]
+    season = leagues["current_season"]
+    data_analysis = DataAnalysis(sport, version, df, league_id, season)
+    return data_analysis
+
+
+def report_percentage_favourite_all_sports():
+    """Report the percentage favourite in each sport"""
     for data in leagues_dict:
-        sport = data["sport"]
-        sport_data = SportsData(sport, data["version"])
-        for i in data["leagues"]:
-            league_id = i["league_id"]
-            league_name = i["league_name"]
-            season = i["current_season"]
-            data_analysis = DataAnalysis(
-                sport_data.get_sport(), sport_data.get_version(), df, league_id, season
-            )
-            percentage = data_analysis.percentage_fav_win()
-            if type(percentage) != str:
-                print(
-                    f"In the {season} season of {sport}'s {league_name}, the favourite won {percentage:.0%} of the time"
-                )
-            else:
-                print(f"{sport}'s {league_name} season is yet to start")
+        for league in data["leagues"]:
+            data_analysis = get_all_sports(data, league)
+            report = data_analysis.report_percentage_favourite()
+            if report:
+                print(report)
 
 
-def plot_percentage_favourite():
-    df = pd.read_csv("sportsdata.csv")
+def plot_percentage_favourite_all_sports():
+    """Use MatPlotLib to plot the favourite win % in each sport"""
     x_axis = []
     y_axis = []
     for data in leagues_dict:
-        sport = data["sport"]
-        sport_data = SportsData(sport, data["version"])
-        for i in data["leagues"]:
-            league_id = i["league_id"]
-            league_name = i["league_name"]
-            season = i["current_season"]
-            data_analysis = DataAnalysis(
-                sport_data.get_sport(), sport_data.get_version(), df, league_id, season
-            )
+        for league in data["leagues"]:
+            data_analysis = get_all_sports(data, league)
             percentage = data_analysis.percentage_fav_win()
+            league_name = data_analysis.get_league_name(data_analysis.get_league_id())
             if type(percentage) != str:
                 x_axis.append(league_name)
                 y_axis.append(percentage)
@@ -55,32 +50,11 @@ def plot_percentage_favourite():
     plt.show()
 
 
-def bet_on_fav(bet=10):
-    df = pd.read_csv("sportsdata.csv")
+def bet_on_fav_all_sports(bet=10):
+    """Establish how much you would win or lose if betting on the favourite in each game"""
     for data in leagues_dict:
-        sport = data["sport"]
-        sport_data = SportsData(sport, data["version"])
-        for i in data["leagues"]:
-            league_id = i["league_id"]
-            league_name = i["league_name"]
-            season = i["current_season"]
-            data_analysis = DataAnalysis(
-                sport_data.get_sport(), sport_data.get_version(), df, league_id, season
-            )
-            total_games = data_analysis.count_dataframe_length(df)
-            if total_games == 0:
-                pass
-            else:
-                total_bet = bet * total_games
-                total_fav_return = bet * data_analysis.get_winning_fav_odds_total(df)
-                total_winnings = total_fav_return - total_bet
-                if total_winnings < 0:
-                    won_lost = "lost"
-                else:
-                    won_lost = "won"
-                print(
-                    f"If you'd bet ${bet} on the favourites in every game in the {league_name} you would've {won_lost} ${abs(total_winnings):,.2f}"
-                )
-
-
-bet_on_fav(20)
+        for league in data["leagues"]:
+            data_analysis = get_all_sports(data, league)
+            bet_return = data_analysis.bet_on_fav(bet)
+            if bet_return:
+                print(bet_return)
