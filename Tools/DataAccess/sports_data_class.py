@@ -54,29 +54,48 @@ class SportsData(SportClass):
     def get_games(self, league_id, season, date):
         """Gets games from a specific league, season & date"""
         api = APICall(self.get_sport(), self.get_version())
-        url = api.api_url(
-            "games",
-            f"league={league_id}&season={season}&date={date}",
-        )
-        games = api.call_api(url)
+        if self.get_sport() != "football":
+            url = api.api_url(
+                "games",
+                f"league={league_id}&season={season}&date={date}",
+            )
+            games = api.call_api(url)
+        else:
+            url = api.api_url(
+                "fixtures",
+                f"league={league_id}&season={season}&date={date}",
+            )
+            games = api.call_api(url)
         return games
 
     def get_result(self, games, index):
-        scores = games["response"][index]["scores"]
-        try:
-            if scores["home"]["score"] > scores["away"]["score"]:
+        if self.get_sport() == "football":
+            param = "goals"
+        else:
+            param = "scores"
+        scores = games["response"][index][param]
+        if self.get_sport() == "football":
+            if scores["home"] > scores["away"]:
                 result = "home"
-            elif scores["away"]["score"] > scores["home"]["score"]:
+            elif scores["away"] > scores["home"]:
                 result = "away"
             else:
                 result = "draw"
-        except:
-            if scores["home"]["total"] > scores["away"]["total"]:
-                result = "home"
-            elif scores["away"]["total"] > scores["home"]["total"]:
-                result = "away"
-            else:
-                result = "draw"
+        else:
+            try:
+                if scores["home"]["score"] > scores["away"]["score"]:
+                    result = "home"
+                elif scores["away"]["score"] > scores["home"]["score"]:
+                    result = "away"
+                else:
+                    result = "draw"
+            except:
+                if scores["home"]["total"] > scores["away"]["total"]:
+                    result = "home"
+                elif scores["away"]["total"] > scores["home"]["total"]:
+                    result = "away"
+                else:
+                    result = "draw"
         return result
 
     def get_odds(self, game_id):
@@ -91,10 +110,14 @@ class SportsData(SportClass):
     def get_mean_home_odds(self, odds):
         home_odds = []
         bookmakers = odds["response"][0]["bookmakers"]
+        if self.get_sport() != "football":
+            bet = "Home/Away"
+        else:
+            bet = "Match Winner"
         for i in range(len(bookmakers)):
             bets = bookmakers[i]["bets"]
             for j in range(len(bets)):
-                if bets[j]["name"] == "Home/Away":
+                if bets[j]["name"] == bet:
                     for k in range(len(bets[j]["values"])):
                         if bets[j]["values"][k]["value"] == "Home":
                             home = bets[j]["values"][k]["odd"]
@@ -106,10 +129,14 @@ class SportsData(SportClass):
     def get_mean_away_odds(self, odds):
         away_odds = []
         bookmakers = odds["response"][0]["bookmakers"]
+        if self.get_sport() != "football":
+            bet = "Home/Away"
+        else:
+            bet = "Match Winner"
         for i in range(len(bookmakers)):
             bets = bookmakers[i]["bets"]
             for j in range(len(bets)):
-                if bets[j]["name"] == "Home/Away":
+                if bets[j]["name"] == bet:
                     for k in range(len(bets[j]["values"])):
                         if bets[j]["values"][k]["value"] == "Away":
                             away = bets[j]["values"][k]["odd"]
@@ -121,10 +148,14 @@ class SportsData(SportClass):
     def get_mean_draw_odds(self, odds):
         draw_odds = []
         bookmakers = odds["response"][0]["bookmakers"]
+        if self.get_sport() != "football":
+            bet = "Home/Away"
+        else:
+            bet = "Match Winner"
         for i in range(len(bookmakers)):
             bets = bookmakers[i]["bets"]
             for j in range(len(bets)):
-                if bets[j]["name"] == "Home/Away":
+                if bets[j]["name"] == bet:
                     for k in range(len(bets[j]["values"])):
                         if bets[j]["values"][k]["value"] == "Draw":
                             draw = bets[j]["values"][k]["odd"]
@@ -146,11 +177,18 @@ class SportsData(SportClass):
             return "draw"
 
     def get_dataframe_data(self, games, index, league_id, league_name, season):
-        if games["response"][index]["status"]["short"] != "FT":
+        if (
+            self.get_sport() == "football"
+            and games["response"][index]["fixture"]["status"]["short"] != "FT"
+            or self.get_sport() != "football"
+            and games["response"][index]["status"]["short"] != "FT"
+        ):
             pass
         else:
             if self.get_sport() == "afl":
                 game_id = games["response"][index]["game"]["id"]
+            elif self.get_sport() == "football":
+                game_id = games["response"][index]["fixture"]["id"]
             else:
                 game_id = games["response"][index]["id"]
             odds = self.get_odds(game_id)

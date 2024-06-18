@@ -37,3 +37,10 @@ def save_data():
 
 
 save_data()
+
+# a = SportsData("football", "v3")
+# odds = a.get_odds(1189847)
+# home_odds = a.get_mean_home_odds(odds)
+# print(home_odds)
+# games = a.get_games(4, 2024, "2024-06-17")
+# print(games)
