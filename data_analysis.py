@@ -23,7 +23,7 @@ def report_percentage_favourite():
                     f"In the {season} season of {sport}'s {league_name}, the favourite won {percentage:.0%} of the time"
                 )
             else:
-                print(f"{sport}'s {league_name} season is yet to start")
+                pass
 
 
 def plot_percentage_favourite():
@@ -77,4 +77,5 @@ def bet_on_fav(bet=10):
                 )
 
 
+report_percentage_favourite()
 bet_on_fav(20)
