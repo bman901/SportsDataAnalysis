@@ -3,27 +3,36 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from Tools.DataAnalysis.data_analysis_class import DataAnalysis
-from Tools.DataAccess.sports_data_class import SportsData
 from Tools.Sports.sports_dicts import leagues_dict
 
+# df = pd.read_csv("sportsdata.csv")
+#     for data in leagues_dict:
+#         sport = data["sport"]
+#         version = data["version"]
+#         for i in data["leagues"]:
+#             league_id = i["league_id"]
+#             season = i["current_season"]
+#             data_analysis = DataAnalysis(sport, version, df, league_id, season)
+#             return data_analysis
 
-def report_percentage_favourite():
+
+def get_all_sports(data, leagues):
     df = pd.read_csv("sportsdata.csv")
+    sport = data["sport"]
+    version = data["version"]
+    league_id = leagues["league_id"]
+    season = leagues["current_season"]
+    data_analysis = DataAnalysis(sport, version, df, league_id, season)
+    return data_analysis
+
+
+def report_percentage_favourite_all_sports():
     for data in leagues_dict:
-        sport = data["sport"]
-        version = data["version"]
-        for i in data["leagues"]:
-            league_id = i["league_id"]
-            league_name = i["league_name"]
-            season = i["current_season"]
-            data_analysis = DataAnalysis(sport, version, df, league_id, season)
-            percentage = data_analysis.percentage_fav_win()
-            if type(percentage) != str:
-                print(
-                    f"In the {season} season of {sport}'s {league_name}, the favourite won {percentage:.0%} of the time"
-                )
-            else:
-                pass
+        for league in data["leagues"]:
+            data_analysis = get_all_sports(data, league)
+            report = data_analysis.report_percentage_favourite()
+            if report:
+                print(report)
 
 
 def plot_percentage_favourite():
@@ -77,5 +86,6 @@ def bet_on_fav(bet=10):
                 )
 
 
-report_percentage_favourite()
-bet_on_fav(20)
+report_percentage_favourite_all_sports()
+# plot_percentage_favourite()
+# bet_on_fav(20)

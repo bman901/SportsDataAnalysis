@@ -3,6 +3,7 @@
 import pandas as pd
 
 from Tools.Sports.sport_class import Sport as SportClass
+from Tools.Sports.sports_dicts import leagues_dict
 
 
 class DataAnalysis(SportClass):
@@ -44,6 +45,15 @@ class DataAnalysis(SportClass):
         df = pd.DataFrame(data=data_frame)
         groupeddf = df.groupby(by=column)
         return groupeddf
+
+    def get_league_name(self, league_id):
+        """Gets the league name for a particular league by using the leagues_dict"""
+        sport = self.get_sport()
+        for data in leagues_dict:
+            if data["sport"] == sport:
+                for i in data["leagues"]:
+                    if i["league_id"] == league_id:
+                        return i["league_name"]
 
     def compare_equal(self, data_frame, column1, column2):
         """Compare two columns to find if they are equal"""
@@ -88,3 +98,13 @@ class DataAnalysis(SportClass):
         df_min_odds = df_odds.min(axis=1)
         sum_min_odds = df_min_odds.sum()
         return sum_min_odds
+
+    def report_percentage_favourite(self):
+        percentage = self.percentage_fav_win()
+        league_name = self.get_league_name(self.league_id)
+        season = self.get_season()
+        sport = self.get_sport()
+        if type(percentage) != str:
+            return f"In the {season} season of {sport}'s {league_name}, the favourite won {percentage:.0%} of the time"
+        else:
+            pass
