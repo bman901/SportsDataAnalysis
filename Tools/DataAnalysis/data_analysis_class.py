@@ -61,9 +61,21 @@ class DataAnalysis(SportClass):
         equaldf = df[df[column1] == df[column2]]
         return equaldf
 
-    def count_dataframe_length(self, data_frame):
-        """Count all equal columns for a specific league and season"""
+    def count_specific_dataframe_length(self, data_frame):
+        """Count all columns for a specific league and season"""
         df = pd.DataFrame(data=data_frame)
+        sport = self.get_sport()
+        league_id = self.get_league_id()
+        season = self.get_season()
+        df_sport = df[df["sport"] == sport]
+        df_league = df_sport[df_sport["league_id"] == league_id]
+        df_season = df_league[df_league["season"] == season]
+        count = len(df_season)
+        return count
+
+    def count_self_dataframe_length(self):
+        """Count all columns for a specific league and season"""
+        df = pd.DataFrame(data=self.get_data_frame())
         sport = self.get_sport()
         league_id = self.get_league_id()
         season = self.get_season()
@@ -77,16 +89,17 @@ class DataAnalysis(SportClass):
         """Calculate the percentage of favourite wins"""
         df = self.get_data_frame()
         equal = self.compare_equal(df, "result", "favourite")
-        favourite_wins = self.count_dataframe_length(equal)
-        total_games = self.count_dataframe_length(df)
+        favourite_wins = self.count_specific_dataframe_length(equal)
+        total_games = self.count_specific_dataframe_length(df)
         if total_games > 0:
             percentage = favourite_wins / total_games
         else:
             percentage = "No games played"
         return percentage
 
-    def get_winning_fav_odds_total(self, data_frame):
-        df = pd.DataFrame(data=data_frame)
+    def get_winning_fav_odds_total(self):
+        """Get the sum of the odds on each favourite within a sport & league"""
+        df = pd.DataFrame(data=self.get_data_frame())
         sport = self.get_sport()
         league_id = self.get_league_id()
         season = self.get_season()
@@ -100,6 +113,7 @@ class DataAnalysis(SportClass):
         return sum_min_odds
 
     def report_percentage_favourite(self):
+        """Report the % wins for the favourite within a sport & league"""
         percentage = self.percentage_fav_win()
         league_name = self.get_league_name(self.league_id)
         season = self.get_season()
@@ -108,3 +122,19 @@ class DataAnalysis(SportClass):
             return f"In the {season} season of {sport}'s {league_name}, the favourite won {percentage:.0%} of the time"
         else:
             pass
+
+    def bet_on_fav(self, bet):
+        """Report the winnings if you'd bet on the favourite every game within a sport & league"""
+        total_games = self.count_self_dataframe_length()
+        league_name = self.get_league_name(self.get_league_id())
+        if total_games == 0:
+            pass
+        else:
+            total_bet = bet * total_games
+            total_fav_return = bet * self.get_winning_fav_odds_total()
+            total_winnings = total_fav_return - total_bet
+            if total_winnings < 0:
+                won_lost = "lost"
+            else:
+                won_lost = "won"
+            return f"If you'd bet ${bet} on the favourites in every game in the {league_name} you would've {won_lost} ${abs(total_winnings):,.2f}"
