@@ -58,3 +58,8 @@ def bet_on_fav_all_sports(bet=10):
             bet_return = data_analysis.bet_on_fav(bet)
             if bet_return:
                 print(bet_return)
+
+
+report_percentage_favourite_all_sports()
+plot_percentage_favourite_all_sports()
+bet_on_fav_all_sports(20)
