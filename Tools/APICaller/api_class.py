@@ -1,7 +1,7 @@
 """ API Caller """
 
 import requests
-import time
+from tenacity import retry, wait_random_exponential, stop_after_delay
 from Tools.APICaller import key
 from Tools.Sports.sport_class import Sport as SportClass
 
@@ -15,26 +15,16 @@ class APICall(SportClass):
         self.payload = {}
         self.headers = {"x-apisports-key": key.API_key}
 
+    @retry(wait=wait_random_exponential(multiplier=1, max=60) + stop_after_delay(10))
     def call_api(self, url):
         """Calls the API based on the URL provided"""
         s = requests.Session()
-        # count = 0
-        # while count < 2:
-        response = s.request("GET", url, headers=self.headers, data=self.payload).json()
-        # if type(response["errors"]) != dict:
-        #     break
-        # elif (
-        #     response["errors"]["rateLimit"]
-        #     == "Too many requests. Your rate limit is 10 requests per minute."
-        # ):
-        #     print(
-        #         "API limit request exceeded, waiting 60 seconds and then trying once more"
-        #     )
-        #     time.sleep(60)
-        #     count += 1
-        # else:
-        #     print("API call returned an error")
-        #     break
+        try:
+            response = s.request(
+                "GET", url, headers=self.headers, data=self.payload
+            ).json()
+        except:
+            print("Rate limit reached, trying again")
         return response
 
     def api_url(self, call, qualifiers=""):
