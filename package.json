@@ -2,6 +2,7 @@
   "dependencies": {
     "pathlib": "^0.1.2",
     "requests": "^0.3.0",
+    "tenacity": "^1.0.4",
     "tqdm": "^2.0.3"
   }
 }

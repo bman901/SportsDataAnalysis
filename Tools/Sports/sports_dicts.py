@@ -7,13 +7,13 @@ year_next = str(year) + " - " + str(nextyear)
 year_last = str(lastyear) + " - " + str(year)
 
 if datetime.now().month > 6:
-    nbl_current_season = nba_current_season = year_next
-    football_current_season = year
+    two_years = year_next
+    one_year = year
 else:
-    nbl_current_season = nba_current_season = year_last
-    football_current_season = lastyear
+    two_years = year_last
+    one_year = lastyear
 
-afl_current_season = mlb_current_season = nbaw_current_season = year
+calendar_year = year
 
 leagues_dict = [
     {
@@ -23,7 +23,7 @@ leagues_dict = [
             {
                 "league_id": 1,
                 "league_name": "AFL Premiership",
-                "current_season": afl_current_season,
+                "current_season": calendar_year,
             }
         ],
     },
@@ -34,7 +34,7 @@ leagues_dict = [
             {
                 "league_id": 1,
                 "league_name": "MLB",
-                "current_season": mlb_current_season,
+                "current_season": calendar_year,
             }
         ],
     },
@@ -45,17 +45,17 @@ leagues_dict = [
             {
                 "league_id": 1,
                 "league_name": "NBL",
-                "current_season": nbl_current_season,
+                "current_season": two_years,
             },
             {
                 "league_id": 12,
                 "league_name": "NBA",
-                "current_season": nba_current_season,
+                "current_season": two_years,
             },
             {
                 "league_id": 13,
                 "league_name": "NBA W",
-                "current_season": nbaw_current_season,
+                "current_season": calendar_year,
             },
         ],
     },
@@ -66,98 +66,143 @@ leagues_dict = [
             {
                 "league_id": 4,
                 "league_name": "Euros Championship",
-                "current_season": 2024,
+                "current_season": calendar_year,
+            },
+            {
+                "league_id": 1,
+                "league_name": "World Cup",
+                "current_season": calendar_year,
+            },
+            {
+                "league_id": 5,
+                "league_name": "UEFA Nations League",
+                "current_season": one_year,
             },
             {
                 "league_id": 39,
                 "league_name": "Premier League",
-                "current_season": football_current_season,
+                "current_season": one_year,
             },
             {
                 "league_id": 140,
                 "league_name": "La Liga",
-                "current_season": football_current_season,
+                "current_season": one_year,
             },
             {
                 "league_id": 61,
                 "league_name": "Ligue 1",
-                "current_season": football_current_season,
+                "current_season": one_year,
             },
             {
                 "league_id": 135,
                 "league_name": "Serie A",
-                "current_season": football_current_season,
+                "current_season": one_year,
             },
             {
                 "league_id": 78,
                 "league_name": "Bundesliga",
-                "current_season": football_current_season,
+                "current_season": one_year,
             },
             {
                 "league_id": 188,
                 "league_name": "A-League",
-                "current_season": football_current_season,
+                "current_season": one_year,
+            },
+        ],
+    },
+    {
+        "sport": "handball",
+        "version": "v1",
+        "leagues": [
+            {
+                "league_id": 131,
+                "league_name": "Champions League",
+                "current_season": one_year,
+            },
+        ],
+    },
+    {
+        "sport": "hockey",
+        "version": "v1",
+        "leagues": [
+            {
+                "league_id": 31,
+                "league_name": "NHL",
+                "current_season": one_year,
+            },
+            {
+                "league_id": 56,
+                "league_name": "UK Challenge Cup",
+                "current_season": one_year,
+            },
+        ],
+    },
+    {
+        "sport": "american-football",
+        "version": "v1",
+        "leagues": [
+            {
+                "league_id": 1,
+                "league_name": "NFL",
+                "current_season": one_year,
+            },
+            {
+                "league_id": 2,
+                "league_name": "NCAA",
+                "current_season": one_year,
+            },
+        ],
+    },
+    {
+        "sport": "rugby",
+        "version": "v1",
+        "leagues": [
+            {
+                "league_id": 25,
+                "league_name": "Six Nations",
+                "current_season": calendar_year,
+            },
+            {
+                "league_id": 85,
+                "league_name": "Rugby Championship",
+                "current_season": calendar_year,
+            },
+            {
+                "league_id": 71,
+                "league_name": "Super Rugby",
+                "current_season": calendar_year,
+            },
+            {
+                "league_id": 69,
+                "league_name": "World Cup",
+                "current_season": calendar_year,
+            },
+        ],
+    },
+    {
+        "sport": "volleyball",
+        "version": "v1",
+        "leagues": [
+            {
+                "league_id": 118,
+                "league_name": "Poland - I. Liga",
+                "current_season": one_year,
+            },
+            {
+                "league_id": 97,
+                "league_name": "Italy - SuperLega",
+                "current_season": one_year,
+            },
+            {
+                "league_id": 63,
+                "league_name": "France - Ligue A",
+                "current_season": one_year,
+            },
+            {
+                "league_id": 132,
+                "league_name": "Russia - SuperLeague",
+                "current_season": one_year,
             },
         ],
     },
 ]
-
-holding_dict = [
-    {
-        "sport": "afl",
-        "version": "v1",
-        "leagues": [
-            {
-                "league_id": 1,
-                "league_name": "AFL Premiership",
-                "current_season": afl_current_season,
-            }
-        ],
-    },
-    {
-        "sport": "baseball",
-        "version": "v1",
-        "leagues": [
-            {
-                "league_id": 1,
-                "league_name": "MLB",
-                "current_season": mlb_current_season,
-            }
-        ],
-    },
-    {
-        "sport": "basketball",
-        "version": "v1",
-        "leagues": [
-            {
-                "league_id": 1,
-                "league_name": "NBL",
-                "current_season": nbl_current_season,
-            },
-            {
-                "league_id": 12,
-                "league_name": "NBA",
-                "current_season": nba_current_season,
-            },
-            {
-                "league_id": 13,
-                "league_name": "NBA W",
-                "current_season": nbaw_current_season,
-            },
-        ],
-    },
-]
-
-versions_dict = {
-    "afl": "v1",
-    "basketball": "v1",
-    "football": "v3",
-    "baseball": "v1",
-    "formula-1": "v1",
-    "handball": "v1",
-    "hockey": "v1",
-    "mma": "v1",
-    "american-football": "v1",
-    "rugby": "v1",
-    "volleyball": "v1",
-}
