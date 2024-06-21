@@ -9,8 +9,8 @@ from Tools.Sports.sports_dicts import leagues_dict
 class DataAnalysis(SportClass):
     """The Data Analysis class which analyses the data"""
 
-    def __init__(self, sport, version, data_frame, league_id, season):
-        super().__init__(sport, version)
+    def __init__(self, sport, data_frame, league_id, season):
+        super().__init__(sport)
         self.data_frame = data_frame
         self.league_id = league_id
         self.season = season
@@ -112,7 +112,7 @@ class DataAnalysis(SportClass):
         sum_min_odds = df_min_odds.sum()
         return sum_min_odds
 
-    def report_percentage_favourite(self):
+    def get_percentage_favourite(self):
         """Report the % wins for the favourite within a sport & league"""
         percentage = self.percentage_fav_win()
         league_name = self.get_league_name(self.league_id)
@@ -122,6 +122,13 @@ class DataAnalysis(SportClass):
             return f"In the {season} season of {sport}'s {league_name}, the favourite won {percentage:.0%} of the time"
         else:
             pass
+
+    def report_percentage_favourite(self):
+        report = self.get_percentage_favourite()
+        if report:
+            print(report)
+        else:
+            print("No data for the chosen season")
 
     def bet_on_fav(self, bet):
         """Report the winnings if you'd bet on the favourite every game within a sport & league"""

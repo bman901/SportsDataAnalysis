@@ -12,11 +12,34 @@ def get_all_sports(data, leagues):
     """Get all sports"""
     df = pd.read_csv("sportsdata.csv")
     sport = data["sport"]
-    version = data["version"]
     league_id = leagues["league_id"]
     season = leagues["current_season"]
-    data_analysis = DataAnalysis(sport, version, df, league_id, season)
+    data_analysis = DataAnalysis(sport, df, league_id, season)
     return data_analysis
+
+
+def report_percentage_favourite(sport, league_id, season):
+    """Report the percentage favourite for a specfic sport"""
+    df = pd.read_csv("sportsdata.csv")
+    data_analysis = DataAnalysis(sport, df, league_id, season)
+    data_analysis.report_percentage_favourite()
+
+
+def report_percentage_favourite_all_seasons(sport, league_id):
+    """Report the percentage favourite for a specfic sport"""
+    df = pd.read_csv("sportsdata.csv")
+    for data in leagues_dict:
+        if data["sport"] == sport:
+            for league in data["leagues"]:
+                if league["league_id"] == league_id:
+                    current_season = league["current_season"]
+                    data_analysis = DataAnalysis(sport, df, league_id, current_season)
+                    data_analysis.report_percentage_favourite()
+                    for previous_season in league["previous_seasons"]:
+                        prev_season_analysis = DataAnalysis(
+                            sport, df, league_id, previous_season
+                        )
+                        prev_season_analysis.report_percentage_favourite()
 
 
 def report_percentage_favourite_all_sports():
@@ -24,7 +47,7 @@ def report_percentage_favourite_all_sports():
     for data in leagues_dict:
         for league in data["leagues"]:
             data_analysis = get_all_sports(data, league)
-            report = data_analysis.report_percentage_favourite()
+            report = data_analysis.get_percentage_favourite()
             if report:
                 print(report)
 

@@ -9,9 +9,11 @@ from Tools.Sports.sport_class import Sport as SportClass
 class APICall(SportClass):
     """API Class to call the API"""
 
-    def __init__(self, sport, version):
-        super().__init__(sport, version)
-        self.url = "https://" + self.version + "." + self.sport + ".api-sports.io"
+    def __init__(self, sport):
+        super().__init__(sport)
+        self.url = (
+            "https://" + self.get_version() + "." + self.get_sport() + ".api-sports.io"
+        )
         self.payload = {}
         self.headers = {"x-apisports-key": key.API_key}
 
