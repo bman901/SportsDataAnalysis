@@ -8,8 +8,8 @@ from Tools.FileManager.file_class import FileManager
 class DownloadManager(SportClass):
     """Download manager class"""
 
-    def __init__(self, sport, version):
-        super().__init__(sport, version)
+    def __init__(self, sport):
+        super().__init__(sport)
         self.sport_folder = "Sports_Data/" + str(self.sport).capitalize()
 
     def get_folder(self):
@@ -18,8 +18,8 @@ class DownloadManager(SportClass):
 
     def download_data(self, folder, call, qualifiers=""):
         """Calls the API & downloads the data"""
-        api = APICall(self.get_sport(), self.get_version())
-        fm = FileManager(self.get_sport(), self.get_version())
+        api = APICall(self.get_sport())
+        fm = FileManager(self.get_sport())
         url = api.api_url(call, qualifiers)
         response = api.call_api(url)
         if "/" in call:
@@ -49,7 +49,7 @@ class DownloadManager(SportClass):
     def set_up_sport(self):
         """Sets up the sport file with the status of the API
         and details of all leagues & seasons available"""
-        fm = FileManager(self.get_sport(), self.get_version())
+        fm = FileManager(self.get_sport())
         folder = self.get_folder()
         fm.create_folder(folder)
         self.get_status()
@@ -58,7 +58,7 @@ class DownloadManager(SportClass):
 
     def download_games(self, name, league_id, season):
         """Downloads the game data per season"""
-        fm = FileManager(self.get_sport(), self.get_version())
+        fm = FileManager(self.get_sport())
         folder = self.get_folder() + "/" + str(name) + "/" + str(season)
         fm.create_folder(folder)
         self.download_data(
@@ -68,7 +68,7 @@ class DownloadManager(SportClass):
 
     def download_odds(self, name, league_id, season):
         """Downloads the odds data per season"""
-        fm = FileManager(self.get_sport(), self.get_version())
+        fm = FileManager(self.get_sport())
         folder = self.get_folder() + "/" + str(name) + "/" + str(season)
         fm.create_folder(folder)
         self.download_data(

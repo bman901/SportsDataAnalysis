@@ -13,14 +13,14 @@ class SportsData(SportClass):
 
     def get_leagues(self):
         """Gets the leagues data for a particular sport"""
-        api = APICall(self.get_sport(), self.get_version())
+        api = APICall(self.get_sport())
         url = api.api_url("leagues")
         leagues = api.call_api(url)
         return leagues
 
     def get_seasons(self, league_id):
         """Gets the seasons data for a particular sport"""
-        api = APICall(self.get_sport(), self.get_version())
+        api = APICall(self.get_sport())
         if self.get_sport() == "afl":
             url = api.api_url("seasons")
             data = api.call_api(url)
@@ -53,7 +53,7 @@ class SportsData(SportClass):
 
     def get_games(self, league_id, season, date):
         """Gets games from a specific league, season & date"""
-        api = APICall(self.get_sport(), self.get_version())
+        api = APICall(self.get_sport())
         if self.get_sport() != "football":
             url = api.api_url(
                 "games",
@@ -99,7 +99,7 @@ class SportsData(SportClass):
         return result
 
     def get_odds(self, game_id):
-        api = APICall(self.get_sport(), self.get_version())
+        api = APICall(self.get_sport())
         if self.get_sport() == "football":
             url = api.api_url("odds", "fixture=" + str(game_id))
         else:

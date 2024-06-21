@@ -65,3 +65,17 @@ baseball,154322,1,MLB,2024,25,New York Yankees,4,Baltimore Orioles,home,1.698461
 baseball,154323,1,MLB,2024,36,Toronto Blue Jays,5,Boston Red Sox,away,2.1415384615384614,1.736923076923077,10000.0,home
 baseball,154324,1,MLB,2024,3,Atlanta Braves,12,Detroit Tigers,home,1.6015384615384616,2.373846153846154,10000.0,home
 baseball,154325,1,MLB,2024,22,Minnesota Twins,34,Tampa Bay Rays,home,1.5292307692307692,2.57,10000.0,home
+baseball,154326,1,MLB,2024,6,Chicago Cubs,31,San Francisco Giants,home,1.90375,1.91375,10000.0,home
+baseball,154327,1,MLB,2024,35,Texas Rangers,24,New York Mets,away,1.919090909090909,1.9163636363636365,10000.0,home
+baseball,154328,1,MLB,2024,7,Chicago White Sox,15,Houston Astros,home,2.483846153846154,1.5592307692307692,10000.0,home
+baseball,154329,1,MLB,2024,10,Colorado Rockies,18,Los Angeles Dodgers,away,2.5946153846153845,1.523076923076923,10000.0,home
+baseball,154330,1,MLB,2024,17,Los Angeles Angels,20,Milwaukee Brewers,away,2.316923076923077,1.6353846153846154,10000.0,home
+baseball,154331,1,MLB,2024,26,Oakland Athletics,16,Kansas City Royals,home,2.1361538461538463,1.744615384615385,10000.0,home
+baseball,154332,1,MLB,2024,3,Atlanta Braves,12,Detroit Tigers,home,1.7315384615384617,2.15,10000.0,home
+baseball,154333,1,MLB,2024,28,Pittsburgh Pirates,8,Cincinnati Reds,home,1.74,2.1446153846153844,10000.0,home
+baseball,154334,1,MLB,2024,19,Miami Marlins,33,St.Louis Cardinals,home,2.313846153846154,1.6315384615384616,10000.0,home
+basketball,384847,13,NBA W,2024,171,Phoenix Mercury W,170,New York Liberty W,home,2.821875,1.441875,10000.0,home
+basketball,384848,13,NBA W,2024,166,Indiana Fever W,175,Washington Mystics W,home,1.44125,2.819375,10000.0,home
+football,1145518,4,Euros Championship,2024,1108,Scotland,15,Switzerland,draw,4.549411764705882,1.8705882352941177,3.4523529411764704,away
+football,1145519,4,Euros Championship,2024,25,Germany,769,Hungary,home,1.271764705882353,10.622941176470588,6.090588235294118,home
+football,1145520,4,Euros Championship,2024,3,Croatia,778,Albania,draw,1.4470588235294117,7.8488235294117645,4.437647058823529,home

@@ -1,12 +1,16 @@
 """ The 'Sport' class which acts as the parent for other classes """
 
+from Tools.Sports.sports_dicts import leagues_dict
+
 
 class Sport:
     """The 'Sport' class which acts as the parent for other classes"""
 
-    def __init__(self, sport, version):
+    def __init__(self, sport):
         self.sport = sport
-        self.version = version
+        for data in leagues_dict:
+            if self.sport == data["sport"]:
+                self.version = data["version"]
 
     def get_sport(self):
         """Returns the name of the sport"""
