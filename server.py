@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 from Tools.Sports.sports_dicts import leagues_dict
 
 app = Flask(__name__)
@@ -11,7 +11,7 @@ def home():
 
 @app.route("/analysis")
 def analysis():
-    return render_template("analysis.html")
+    return render_template("analysis.html", sports=leagues_dict)
 
 
 if __name__ == "__main__":
