@@ -9,12 +9,9 @@ def home():
     return render_template("home.html", sports=leagues_dict)
 
 
-for data in leagues_dict:
-    sport = data["sport"]
-
-    @app.route("/<sport>", endpoint=sport)
-    def create_page(sport):
-        return render_template(sport + ".html")
+@app.route("/analysis")
+def analysis():
+    return render_template("analysis.html")
 
 
 if __name__ == "__main__":
