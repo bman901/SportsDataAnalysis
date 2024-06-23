@@ -1,16 +1,17 @@
-from flask import Flask
+from flask import Flask, render_template
+from Tools.Sports.sports_dicts import leagues_dict
 
 app = Flask(__name__)
 
 
 @app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+def home():
+    return render_template("home.html", sports=leagues_dict)
 
 
-@app.route("/about")
-def about():
-    return "<p>About</p>"
+@app.route("/analysis")
+def analysis():
+    return render_template("analysis.html")
 
 
 if __name__ == "__main__":
