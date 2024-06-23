@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> </title>
+  </head>
+
+  <body>
+    <h1>Home Page</h1>
+    <ul>
+      {% for sport in sports %}
+      <li><a href="{{sport.sport}}">{{ sport.sport }}</a></li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
