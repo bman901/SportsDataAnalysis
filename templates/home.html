@@ -1,11 +1,39 @@
 {% extends "layout.html" %} {% block content %}
-<h1>Home Page</h1>
-<ul>
-  {% for sport in sports %}
-  <li><a href="analysis?sport={{sport.sport}}">{{ sport.sport }}</a></li>
-  {% for league in sport.leagues %}
-  <p>League name: {{league.league_name}}</p>
-  <p>Current season: {{league.current_season}}</p>
-  {% endfor %} {% endfor %}
-</ul>
+<div><h1>Sports Data Analysis</h1></div>
+
+<div>
+  <img src= {{ url_for('static',filename='img/All_Sports_Image.jpg') }}
+  class="img-fluid mx-auto d-block half-size" alt="All Sports" />
+</div>
+
+<br />
+
+<div>
+  <p>
+    A Python application which records the results and odds of various sports
+    each day and allows you to analyse the data.
+  </p>
+</div>
+
+<div>
+  <p>Choose sport to review:</p>
+</div>
+
+<div>
+  <ul>
+    <a class="btn btn-primary" href="analysis?sport=all-sports" role="button"
+      >All Sports</a
+    >
+    {% for sport in sports %}
+    <a
+      class="btn btn-primary"
+      href="analysis?sport={{sport.sport}}"
+      role="button"
+      >{% if sport.sport == "afl" %} {{ sport.sport.upper() }} {% else %} {{
+      sport.sport.capitalize() }} {% endif %}</a
+    >
+    {% endfor %}
+  </ul>
+</div>
+
 {% endblock content %}
