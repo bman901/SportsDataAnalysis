@@ -22,12 +22,21 @@ class APICall(SportClass):
         """Calls the API based on the URL provided"""
         s = requests.Session()
         try:
-            response = s.request(
-                "GET", url, headers=self.headers, data=self.payload
-            ).json()
+            response = s.request("GET", url, headers=self.headers, data=self.payload)
         except:
             print("Rate limit reached, trying again")
-        return response
+        return response.json()
+
+    # def call_api(self, url):
+    # """Calls the API based on the URL provided"""
+    # s = requests.Session()
+    # response = s.request("GET", url, headers=self.headers, data=self.payload)
+    # if response.status_code == 429:
+    #     print("Rate limit reached, waiting 60 seconds and trying again")
+    #     time.sleep(60)
+    #     self.call_api(url)
+    # else:
+    #     return response.json()
 
     def api_url(self, call, qualifiers=""):
         """Sets up the URL for the API"""
