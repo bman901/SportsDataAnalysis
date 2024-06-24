@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for
 from Tools.Sports.sports_dicts import leagues_dict
+from data_analysis import *
 
 app = Flask(__name__)
 
