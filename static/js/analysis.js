@@ -1,11 +1,12 @@
+var sport = GetURLParameter("sport");
+
 window.onload = function () {
-  var sport = GetURLParameter("sport");
   if (sport == "all-sports") {
-    sport = sport.replace("-", " ");
+    capital_sport = sport.replace("-", " ");
   } else if (sport == "afl") {
-    sport = sport.toUpperCase();
+    capital_sport = sport.toUpperCase();
   }
-  FillInSport(sport);
+  FillInSport(capital_sport);
 };
 
 $(document).ready(function () {
@@ -15,7 +16,7 @@ $(document).ready(function () {
       type: "get",
       contentType: "application/json",
       data: {
-        btn_sport: $(this).text(),
+        btn_sport: sport,
       },
     });
   });
