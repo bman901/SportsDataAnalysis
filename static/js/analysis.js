@@ -8,6 +8,19 @@ window.onload = function () {
   FillInSport(sport);
 };
 
+$(document).ready(function () {
+  $(".btn").click(function () {
+    $.ajax({
+      url: "",
+      type: "get",
+      contentType: "application/json",
+      data: {
+        btn_sport: $(this).text(),
+      },
+    });
+  });
+});
+
 function GetURLParameter(sParam) {
   var sPageURL = window.location.search.substring(1);
   var sURLVariables = sPageURL.split("&");

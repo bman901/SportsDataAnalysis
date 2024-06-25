@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from Tools.Sports.sports_dicts import leagues_dict
 from data_analysis import *
 
@@ -12,6 +12,8 @@ def home():
 
 @app.route("/analysis")
 def analysis():
+    chosen_sport = request.args.get("btn_sport")
+    print("Chosen sport", chosen_sport)
     return render_template("analysis.html", sports=leagues_dict)
 
 
