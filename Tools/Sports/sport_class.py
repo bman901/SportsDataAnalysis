@@ -27,3 +27,8 @@ class Sport:
     def set_version(self, version):
         """Allows you to change the version of the API"""
         self.version = version
+
+    def get_leagues(self):
+        for data in leagues_dict:
+            if self.get_sport() == data["sport"]:
+                return data["leagues"]

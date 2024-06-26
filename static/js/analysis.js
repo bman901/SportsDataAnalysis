@@ -22,7 +22,8 @@ $(document).ready(function () {
         chosen_sport: sport,
       },
       success: function (response) {
-        document.getElementById("percentage_fav").innerHTML = response.perc_fav;
+        document.getElementById("percentage_fav").innerHTML =
+          data[0]["perc_fav"];
       },
     });
   });
@@ -37,10 +38,11 @@ $(document).ready(function () {
       chosen_sport: sport,
     },
     success: function (response) {
-      league_names = response.league_names;
-      document
-        .getElementById("league_btns")
-        .insertAdjacentHTML("beforeend", league_names);
+      var data = response.data;
+
+      for (let i = 0; i < data.length; i++) {
+        createBtn(data[i]["league_name"]);
+      }
     },
   });
 });
@@ -54,6 +56,13 @@ function GetURLParameter(sParam) {
       return sParameterName[1];
     }
   }
+}
+
+function createBtn(btn_name) {
+  var btn = document.createElement("button");
+  btn.className = "btn btn-primary";
+  btn.textContent = btn_name;
+  document.body.appendChild(btn);
 }
 
 function TitleCase(str) {
