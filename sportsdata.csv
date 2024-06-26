@@ -144,4 +144,12 @@ basketball,384859,13,NBA W,2024,175,Washington Mystics W,165,Dallas Wings W,home
 basketball,384861,13,NBA W,2024,172,Seattle Storm W,164,Connecticut Sun W,home,1.8046666666666664,2.026,10000.0,home
 basketball,384860,13,NBA W,2024,163,Chicago Sky W,166,Indiana Fever W,home,1.7426666666666666,2.108,10000.0,home
 football,1145527,4,Euros Championship,2024,15,Switzerland,25,Germany,draw,6.011764705882353,1.6411764705882352,3.724117647058823,away
-football,1145528,4,Euros Championship,2024,1108,Scotland,769,Hungary,away,2.6758823529411764,2.458823529411765,3.7929411764705883,home
+football,1145528,4,Euros Championship,2024,1108,Scotland,769,Hungary,away,2.6758823529411764,2.458823529411765,3.792941176470588,home
+baseball,154399,1,MLB,2024,4,Baltimore Orioles,9,Cleveland Guardians,away,1.840769230769231,1.9984615384615383,10000.0,home
+baseball,154400,1,MLB,2024,12,Detroit Tigers,27,Philadelphia Phillies,away,2.5076923076923077,1.5523076923076924,10000.0,home
+baseball,154401,1,MLB,2024,34,Tampa Bay Rays,32,Seattle Mariners,home,1.8692307692307693,1.9653846153846153,10000.0,home
+baseball,154402,1,MLB,2024,5,Boston Red Sox,36,Toronto Blue Jays,home,1.596666666666667,2.3925,10000.0,home
+baseball,154403,1,MLB,2024,8,Cincinnati Reds,28,Pittsburgh Pirates,home,1.7492307692307691,2.123846153846154,10000.0,home
+baseball,154404,1,MLB,2024,33,St.Louis Cardinals,3,Atlanta Braves,home,2.039230769230769,1.810769230769231,10000.0,home
+football,1145529,4,Euros Championship,2024,3,Croatia,768,Italy,draw,3.1605882352941177,2.4558823529411766,3.1158823529411768,away
+football,1145530,4,Euros Championship,2024,778,Albania,9,Spain,away,7.000588235294118,1.4923529411764707,4.316470588235294,away

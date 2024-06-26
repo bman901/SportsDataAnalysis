@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, jsonify
 from Tools.Sports.sports_dicts import leagues_dict
 from data_analysis import *
 
@@ -13,7 +13,9 @@ def home():
 @app.route("/analysis")
 def analysis():
     chosen_sport = request.args.get("btn_sport")
-    print("Chosen sport", chosen_sport)
+    perc_fav = get_perc_fav(chosen_sport, 1, 2024)
+    if request.is_json:
+        return perc_fav
     return render_template("analysis.html", sports=leagues_dict)
 
 
