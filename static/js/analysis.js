@@ -5,8 +5,11 @@ window.onload = function () {
     capital_sport = sport.replace("-", " ");
   } else if (sport == "afl") {
     capital_sport = sport.toUpperCase();
+  } else {
+    capital_sport = sport;
   }
-  FillInSport(capital_sport);
+  FillInTitle(capital_sport);
+  FillInVar(sport);
 };
 
 $(document).ready(function () {
@@ -16,9 +19,29 @@ $(document).ready(function () {
       type: "get",
       contentType: "application/json",
       data: {
-        btn_sport: sport,
+        chosen_sport: sport,
+      },
+      success: function (response) {
+        document.getElementById("percentage_fav").innerHTML = response.perc_fav;
       },
     });
+  });
+});
+
+$(document).ready(function () {
+  $.ajax({
+    url: "",
+    type: "get",
+    contentType: "application/json",
+    data: {
+      chosen_sport: sport,
+    },
+    success: function (response) {
+      league_names = response.league_names;
+      document
+        .getElementById("league_btns")
+        .insertAdjacentHTML("beforeend", league_names);
+    },
   });
 });
 
@@ -44,8 +67,14 @@ function TitleCase(str) {
   return splitStr.join(" ");
 }
 
-function FillInSport(sport) {
+function FillInTitle(sport) {
   document.getElementById("title").innerHTML = document
     .getElementById("title")
     .innerHTML.replace("?sport?", TitleCase(sport));
+}
+
+function FillInVar(sport) {
+  document.getElementById("league_btns").innerHTML = document
+    .getElementById("league_btns")
+    .innerHTML.replace("var_sport", sport);
 }
