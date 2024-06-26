@@ -25,6 +25,14 @@ def report_percentage_favourite(sport, league_id, season):
     data_analysis.report_percentage_favourite()
 
 
+def get_perc_fav(sport, league_id, season):
+    """Report the percentage favourite for a specfic sport"""
+    df = pd.read_csv("sportsdata.csv")
+    data_analysis = DataAnalysis(sport, df, league_id, season)
+    result = data_analysis.get_percentage_favourite()
+    return result
+
+
 def report_percentage_favourite_all_seasons(sport, league_id):
     """Report the percentage favourite for a specfic sport"""
     df = pd.read_csv("sportsdata.csv")

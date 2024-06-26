@@ -1,12 +1,49 @@
+var sport = GetURLParameter("sport");
+
 window.onload = function () {
-  var sport = GetURLParameter("sport");
   if (sport == "all-sports") {
-    sport = sport.replace("-", " ");
+    capital_sport = sport.replace("-", " ");
   } else if (sport == "afl") {
-    sport = sport.toUpperCase();
+    capital_sport = sport.toUpperCase();
+  } else {
+    capital_sport = sport;
   }
-  FillInSport(sport);
+  FillInTitle(capital_sport);
+  FillInVar(sport);
 };
+
+$(document).ready(function () {
+  $(".btn").click(function () {
+    $.ajax({
+      url: "",
+      type: "get",
+      contentType: "application/json",
+      data: {
+        chosen_sport: sport,
+      },
+      success: function (response) {
+        document.getElementById("percentage_fav").innerHTML = response.perc_fav;
+      },
+    });
+  });
+});
+
+$(document).ready(function () {
+  $.ajax({
+    url: "",
+    type: "get",
+    contentType: "application/json",
+    data: {
+      chosen_sport: sport,
+    },
+    success: function (response) {
+      league_names = response.league_names;
+      document
+        .getElementById("league_btns")
+        .insertAdjacentHTML("beforeend", league_names);
+    },
+  });
+});
 
 function GetURLParameter(sParam) {
   var sPageURL = window.location.search.substring(1);
@@ -30,8 +67,14 @@ function TitleCase(str) {
   return splitStr.join(" ");
 }
 
-function FillInSport(sport) {
+function FillInTitle(sport) {
   document.getElementById("title").innerHTML = document
     .getElementById("title")
     .innerHTML.replace("?sport?", TitleCase(sport));
+}
+
+function FillInVar(sport) {
+  document.getElementById("league_btns").innerHTML = document
+    .getElementById("league_btns")
+    .innerHTML.replace("var_sport", sport);
 }

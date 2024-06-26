@@ -1,6 +1,25 @@
 {% extends "layout.html" %} {% block content %}
-<script src="{{ url_for('static', filename = 'js/analysis.js') }}"></script>
 
 <h1 id="title">?sport?</h1>
+
+<!-- <div id="league_btns">
+  <script type="text/javascript">
+    myvar = "{{sports|tojson}}";
+    var parsed = JSON.parse(myvar);
+    document.write(parsed[0]);
+  </script>
+</div> -->
+
+<div>
+  <a class="btn btn-primary" role="button" id="league_btns"></a>
+</div>
+
+<button class="btn btn-success">Report percentage favourite</button>
+
+<div>
+  <p id="percentage_fav">Please choose a season to review</p>
+</div>
+
+<script src="{{ url_for('static', filename = 'js/analysis.js') }}"></script>
 
 {% endblock content %}
