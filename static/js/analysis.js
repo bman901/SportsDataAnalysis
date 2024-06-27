@@ -41,7 +41,7 @@ $(document).ready(function () {
       var data = response.data;
 
       for (let i = 0; i < data.length; i++) {
-        createBtn(data[i]["league_name"]);
+        createBtn(data[i]["league_name"], data[i]["league_id"]);
       }
     },
   });
@@ -58,11 +58,14 @@ function GetURLParameter(sParam) {
   }
 }
 
-function createBtn(btn_name) {
+function createBtn(btn_name, btn_id) {
   var btn = document.createElement("button");
   btn.className = "btn btn-primary";
+  btn.id = btn_id;
   btn.textContent = btn_name;
-  document.body.appendChild(btn);
+  var body = document.getElementById("league_btns");
+  body.appendChild(btn);
+  // document.body.appendChild(btn);
 }
 
 function TitleCase(str) {
