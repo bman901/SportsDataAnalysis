@@ -48,10 +48,10 @@ $(document).ready(function () {
 });
 
 function GetURLParameter(sParam) {
-  var sPageURL = window.location.search.substring(1);
-  var sURLVariables = sPageURL.split("&");
-  for (var i = 0; i < sURLVariables.length; i++) {
-    var sParameterName = sURLVariables[i].split("=");
+  let sPageURL = window.location.search.substring(1);
+  let sURLVariables = sPageURL.split("&");
+  for (let i = 0; i < sURLVariables.length; i++) {
+    let sParameterName = sURLVariables[i].split("=");
     if (sParameterName[0] == sParam) {
       return sParameterName[1];
     }
@@ -59,17 +59,17 @@ function GetURLParameter(sParam) {
 }
 
 function createBtn(btn_name, btn_id) {
-  var btn = document.createElement("button");
+  let btn = document.createElement("button");
   btn.className = "btn btn-primary";
   btn.id = btn_id;
   btn.textContent = btn_name;
-  var body = document.getElementById("league_btns");
+  let body = document.getElementById("league_btns");
   body.appendChild(btn);
   // document.body.appendChild(btn);
 }
 
 function TitleCase(str) {
-  var splitStr = str.split(" ");
+  let splitStr = str.split(" ");
   for (var i = 0; i < splitStr.length; i++) {
     // Assign it back to the array
     splitStr[i] =
