@@ -140,6 +140,7 @@ function GetAnalysisData() {
       analysis = response.analysis;
       PercentageAnalysis(analysis);
       PlotGraph();
+      CreateBetInput();
     },
   });
 }
@@ -147,13 +148,26 @@ function GetAnalysisData() {
 function PercentageAnalysis(analysis) {
   console.log(analysis);
   if (analysis["perc_fav"]) {
-    document.getElementById("analysis_output").innerHTML = analysis["perc_fav"];
+    document.getElementById("perc_fav").innerHTML = analysis["perc_fav"];
   } else {
-    document.getElementById("analysis_output").innerHTML =
+    document.getElementById("perc_fav").innerHTML =
       "No data for the chosen season";
   }
 }
 
 function PlotGraph() {
   document.getElementById("sport_img").src = "../static/img/fav_plot.png";
+}
+
+function CreateBetInput() {
+  let bet_input = document.createElement("input");
+  bet_input.type = "text";
+  bet_input.id = "bet";
+  bet_input.inputmode = "decimal";
+  bet_input.pattern = "(^£$)|(^£d{1,3}(,d{3})*?$)";
+  bet_input.required = "";
+  bet_input.value = "£10";
+  bet_input.class = "";
+  let body = document.getElementById("betting_input");
+  body.appendChild(bet_input);
 }
