@@ -79,6 +79,6 @@ def bet_on_fav_all_sports(bet=10):
                 print(bet_return)
 
 
-report_percentage_favourite_all_sports_all_time()
-plot_percentage_favourite_all_sports()
+# report_percentage_favourite_all_sports_all_time()
+# plot_percentage_favourite_all_sports()
 # bet_on_fav_all_sports(20)
