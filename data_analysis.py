@@ -70,16 +70,16 @@ def plot_percentage_favourite_all_sports():
     plt.clf()
 
 
-def bet_on_fav_all_sports(bet=10):
+def bet_on_fav_all_sports_all_time(bet=10):
     """Establish how much you would win or lose if betting on the favourite in each game"""
     for data in leagues_dict:
         for league in data["leagues"]:
             data_analysis = get_all_sports(data, league)
-            bet_return = data_analysis.bet_on_fav(bet)
+            bet_return = data_analysis.report_bet_on_fav(bet)
             if bet_return:
                 print(bet_return)
 
 
 # report_percentage_favourite_all_sports_all_time()
 # plot_percentage_favourite_all_sports()
-# bet_on_fav_all_sports(20)
+# bet_on_fav_all_sports_all_time(20)

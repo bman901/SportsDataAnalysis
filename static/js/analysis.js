@@ -1,6 +1,9 @@
 var sport = GetURLParameter("sport");
 var chosen_league = 0;
 var chosen_season = 0;
+var chosen_bet = 10;
+var data = {};
+var analysis = {};
 
 window.onload = function () {
   if (sport.includes("-")) {
@@ -25,16 +28,7 @@ $(document).ready(function () {
     success: function (response) {
       data = response.data;
 
-      for (let i = 0; i < data.length; i++) {
-        createBtn(
-          data[i]["league_name"],
-          data[i]["league_id"],
-          "league_btns",
-          "btn-primary"
-        );
-      }
-
-      GetChosenLeague(data);
+      CreateLeagueBtns(data);
     },
   });
 });
@@ -80,16 +74,31 @@ function LoadImage(sport) {
   document.getElementById("sport_img").src = `../static/img/${sport}.jpg`;
 }
 
-function GetChosenLeague(data) {
+function CreateLeagueBtns(data) {
+  for (let i = 0; i < data.length; i++) {
+    createBtn(
+      data[i]["league_name"],
+      data[i]["league_id"],
+      "league_btns",
+      "btn-primary"
+    );
+  }
+
+  GetChosenLeague();
+}
+
+function GetChosenLeague() {
   const league_btn = document.querySelectorAll(".btn-primary");
 
   for (let i = 0; i < league_btn.length; i++) {
     league_btn[i].addEventListener("click", function () {
       chosen_league = league_btn[i].id;
+    });
+    league_btn[i].addEventListener("click", function () {
       LoadAvailableSeasons(data, chosen_league);
       document.getElementById("season_text").innerHTML =
         "Choose season to review:";
-      document.getElementById("analysis_output").innerHTML =
+      document.getElementById("perc_fav").innerHTML =
         "Please choose a season to review";
     });
   }
@@ -121,7 +130,13 @@ function GetChosenSeason() {
   for (let i = 0; i < season_btn.length; i++) {
     season_btn[i].addEventListener("click", function () {
       chosen_season = season_btn[i].id;
+    });
+    season_btn[i].addEventListener("click", function () {
       GetAnalysisData();
+    });
+    season_btn[i].addEventListener("click", function () {
+      CreateBetInput();
+      GetChosenBet();
     });
   }
 }
@@ -135,25 +150,68 @@ function GetAnalysisData() {
       chosen_sport: sport,
       chosen_league: chosen_league,
       chosen_season: chosen_season,
+      chosen_bet: chosen_bet,
     },
     success: function (response) {
       analysis = response.analysis;
       PercentageAnalysis(analysis);
       PlotGraph();
+      Report_Betting(analysis);
     },
   });
 }
 
 function PercentageAnalysis(analysis) {
-  console.log(analysis);
   if (analysis["perc_fav"]) {
-    document.getElementById("analysis_output").innerHTML = analysis["perc_fav"];
+    document.getElementById("perc_fav").innerHTML = analysis["perc_fav"];
   } else {
-    document.getElementById("analysis_output").innerHTML =
+    document.getElementById("perc_fav").innerHTML =
       "No data for the chosen season";
   }
 }
 
+function Report_Betting(analysis) {
+  if (analysis["bet_on_fav"]) {
+    document.getElementById("betting_output").innerHTML =
+      analysis["bet_on_fav"];
+  } else {
+    document.getElementById("betting_output").innerHTML = "";
+  }
+}
+
+function GetChosenBet() {
+  let bet_input_val = document.getElementById("bet");
+  bet_input_val.addEventListener("input", function () {
+    chosen_bet = bet_input_val.value;
+    if (chosen_bet == "") {
+      document.getElementById("betting_output").innerHTML =
+        "Please enter a bet";
+    } else if (chosen_bet <= 0) {
+      document.getElementById("betting_output").innerHTML =
+        "Please enter a positive number";
+    } else {
+      GetAnalysisData();
+    }
+  });
+}
+
 function PlotGraph() {
   document.getElementById("sport_img").src = "../static/img/fav_plot.png";
+}
+
+function CreateBetInput() {
+  if (document.getElementById("betting_input").innerHTML == "") {
+    let bet_input = document.createElement("input");
+    bet_input.type = "number";
+    bet_input.min = "0";
+    bet_input.id = "bet";
+    bet_input.inputmode = "decimal";
+    bet_input.pattern =
+      "^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$";
+    bet_input.required = "";
+    bet_input.value = "10";
+    bet_input.class = "";
+    let body = document.getElementById("betting_input");
+    body.appendChild(bet_input);
+  }
 }
