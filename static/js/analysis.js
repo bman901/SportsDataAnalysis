@@ -93,7 +93,6 @@ function GetChosenLeague() {
   for (let i = 0; i < league_btn.length; i++) {
     league_btn[i].addEventListener("click", function () {
       chosen_league = league_btn[i].id;
-      console.log(chosen_league);
     });
     league_btn[i].addEventListener("click", function () {
       LoadAvailableSeasons(data, chosen_league);
@@ -131,7 +130,6 @@ function GetChosenSeason() {
   for (let i = 0; i < season_btn.length; i++) {
     season_btn[i].addEventListener("click", function () {
       chosen_season = season_btn[i].id;
-      console.log(chosen_season);
     });
     season_btn[i].addEventListener("click", function () {
       GetAnalysisData();
@@ -185,7 +183,6 @@ function GetChosenBet() {
   let bet_input_val = document.getElementById("bet");
   bet_input_val.addEventListener("input", function () {
     chosen_bet = bet_input_val.value;
-    console.log(chosen_bet);
     if (chosen_bet == "") {
       document.getElementById("betting_output").innerHTML =
         "Please enter a bet";
