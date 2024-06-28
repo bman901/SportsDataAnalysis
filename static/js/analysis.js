@@ -3,7 +3,7 @@ var chosen_league = 0;
 var chosen_season = 0;
 
 window.onload = function () {
-  if (sport == "all-sports") {
+  if (sport.includes("-")) {
     capital_sport = sport.replace("-", " ");
   } else if (sport == "afl") {
     capital_sport = sport.toUpperCase();
@@ -11,6 +11,7 @@ window.onload = function () {
     capital_sport = sport;
   }
   FillInTitle(capital_sport);
+  LoadImage(sport);
 };
 
 $(document).ready(function () {
@@ -73,6 +74,10 @@ function FillInTitle(sport) {
   document.getElementById("title").innerHTML = document
     .getElementById("title")
     .innerHTML.replace("?sport?", TitleCase(sport));
+}
+
+function LoadImage(sport) {
+  document.getElementById("sport_img").src = `../static/img/${sport}.jpg`;
 }
 
 function GetChosenLeague(data) {
