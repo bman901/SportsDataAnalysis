@@ -90,6 +90,8 @@ function GetChosenLeague(data) {
   }
 }
 
+// Add an All Seasons button?
+
 function LoadAvailableSeasons(data, chosen_league) {
   document.getElementById("season_btns").innerHTML = "";
   for (let i = 0; i < data.length; i++) {

@@ -36,7 +36,7 @@ def report_percentage_favourite_all_seasons(sport, league_id):
                         prev_season_analysis.report_percentage_favourite()
 
 
-def report_percentage_favourite_all_sports():
+def report_percentage_favourite_all_sports_all_time():
     """Report the percentage favourite in each sport"""
     for data in leagues_dict:
         for league in data["leagues"]:
@@ -79,6 +79,6 @@ def bet_on_fav_all_sports(bet=10):
                 print(bet_return)
 
 
-# report_percentage_favourite_all_sports()
+report_percentage_favourite_all_sports_all_time()
 plot_percentage_favourite_all_sports()
 # bet_on_fav_all_sports(20)
