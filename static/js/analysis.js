@@ -28,16 +28,7 @@ $(document).ready(function () {
     success: function (response) {
       data = response.data;
 
-      for (let i = 0; i < data.length; i++) {
-        createBtn(
-          data[i]["league_name"],
-          data[i]["league_id"],
-          "league_btns",
-          "btn-primary"
-        );
-      }
-
-      GetChosenLeague(data);
+      CreateLeagueBtns(data);
     },
   });
 });
@@ -83,12 +74,28 @@ function LoadImage(sport) {
   document.getElementById("sport_img").src = `../static/img/${sport}.jpg`;
 }
 
-function GetChosenLeague(data) {
+function CreateLeagueBtns(data) {
+  for (let i = 0; i < data.length; i++) {
+    createBtn(
+      data[i]["league_name"],
+      data[i]["league_id"],
+      "league_btns",
+      "btn-primary"
+    );
+  }
+
+  GetChosenLeague();
+}
+
+function GetChosenLeague() {
   const league_btn = document.querySelectorAll(".btn-primary");
 
   for (let i = 0; i < league_btn.length; i++) {
     league_btn[i].addEventListener("click", function () {
       chosen_league = league_btn[i].id;
+      console.log(chosen_league);
+    });
+    league_btn[i].addEventListener("click", function () {
       LoadAvailableSeasons(data, chosen_league);
       document.getElementById("season_text").innerHTML =
         "Choose season to review:";
@@ -124,30 +131,16 @@ function GetChosenSeason() {
   for (let i = 0; i < season_btn.length; i++) {
     season_btn[i].addEventListener("click", function () {
       chosen_season = season_btn[i].id;
+      console.log(chosen_season);
+    });
+    season_btn[i].addEventListener("click", function () {
       GetAnalysisData();
     });
-  }
-}
-
-function CreateInputs() {
-  $.ajax({
-    url: "",
-    type: "get",
-    contentType: "application/json",
-    data: {
-      chosen_sport: sport,
-      chosen_league: chosen_league,
-      chosen_season: chosen_season,
-      chosen_bet: chosen_bet,
-    },
-    success: function (response) {
-      analysis = response.analysis;
-      PercentageAnalysis(analysis);
-      PlotGraph();
+    season_btn[i].addEventListener("click", function () {
       CreateBetInput();
-      Report_Betting(analysis);
-    },
-  });
+      GetChosenBet();
+    });
+  }
 }
 
 function GetAnalysisData() {
@@ -165,7 +158,6 @@ function GetAnalysisData() {
       analysis = response.analysis;
       PercentageAnalysis(analysis);
       PlotGraph();
-      CreateBetInput();
       Report_Betting(analysis);
     },
   });
@@ -197,7 +189,7 @@ function GetChosenBet() {
     if (chosen_bet == "") {
       document.getElementById("betting_output").innerHTML =
         "Please enter a bet";
-    } else if (chosen_bet < 0) {
+    } else if (chosen_bet <= 0) {
       document.getElementById("betting_output").innerHTML =
         "Please enter a positive number";
     } else {
@@ -217,7 +209,8 @@ function CreateBetInput() {
     bet_input.min = "0";
     bet_input.id = "bet";
     bet_input.inputmode = "decimal";
-    bet_input.pattern = "(^£$)|(^£d{1,3}(,d{3})*?$)"; // ^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$
+    bet_input.pattern =
+      "^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$";
     bet_input.required = "";
     bet_input.value = "10";
     bet_input.class = "";
