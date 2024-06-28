@@ -3,6 +3,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 from Tools.DataAnalysis.data_analysis_class import DataAnalysis
 from Tools.Sports.sports_dicts import leagues_dict
@@ -16,21 +17,6 @@ def get_all_sports(data, leagues):
     season = leagues["current_season"]
     data_analysis = DataAnalysis(sport, df, league_id, season)
     return data_analysis
-
-
-def report_percentage_favourite(sport, league_id, season):
-    """Report the percentage favourite for a specfic sport"""
-    df = pd.read_csv("sportsdata.csv")
-    data_analysis = DataAnalysis(sport, df, league_id, season)
-    data_analysis.report_percentage_favourite()
-
-
-def get_perc_fav(sport, league_id, season):
-    """Report the percentage favourite for a specfic sport"""
-    df = pd.read_csv("sportsdata.csv")
-    data_analysis = DataAnalysis(sport, df, league_id, season)
-    result = data_analysis.get_percentage_favourite()
-    return result
 
 
 def report_percentage_favourite_all_seasons(sport, league_id):
@@ -50,7 +36,7 @@ def report_percentage_favourite_all_seasons(sport, league_id):
                         prev_season_analysis.report_percentage_favourite()
 
 
-def report_percentage_favourite_all_sports():
+def report_percentage_favourite_all_sports_all_time():
     """Report the percentage favourite in each sport"""
     for data in leagues_dict:
         for league in data["leagues"]:
@@ -78,6 +64,8 @@ def plot_percentage_favourite_all_sports():
     plt.ylabel("Percentage favourite win")
     plt.title("Percentage favourite wins by league")
     plt.bar(xpos, y_axis)
+    my_path = os.path.dirname(__file__)
+    plt.savefig(my_path + "/static/img/fav_plot.png")
     plt.show()
 
 
@@ -91,6 +79,6 @@ def bet_on_fav_all_sports(bet=10):
                 print(bet_return)
 
 
-# report_percentage_favourite_all_sports()
-# plot_percentage_favourite_all_sports()
+report_percentage_favourite_all_sports_all_time()
+plot_percentage_favourite_all_sports()
 # bet_on_fav_all_sports(20)

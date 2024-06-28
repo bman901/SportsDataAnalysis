@@ -23,7 +23,7 @@ calendar_year = year
 # For calendar year seasons
 previous_seasons_calendar = []
 
-for i in range(2024, year):
+for i in range(2021, year):  # TEMP to test; change back to 2024 when done
     previous_seasons_calendar.append(i)
 
 # For seasons every 4 years
