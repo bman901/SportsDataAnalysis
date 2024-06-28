@@ -22,12 +22,13 @@ def analysis():
         chosen_sport = request.args.get("chosen_sport")
         chosen_league = request.args.get("chosen_league")
         chosen_season = request.args.get("chosen_season")
+        chosen_bet = request.args.get("chosen_bet")
         sport_class = Sport(chosen_sport)
         leagues = sport_class.get_leagues()
         result = get_data(chosen_sport, leagues)
         if chosen_season:
             result["analysis"] = get_anaylsis(
-                chosen_sport, chosen_league, chosen_season
+                chosen_sport, chosen_league, chosen_season, chosen_bet
             )
         return jsonify(result)
     return render_template("analysis.html", sports=leagues_dict)
@@ -56,16 +57,17 @@ def get_data(chosen_sport, leagues):
     return result
 
 
-def get_anaylsis(chosen_sport, chosen_league, chosen_season):
-    analysis_list = {}
+def get_anaylsis(chosen_sport, chosen_league, chosen_season, chosen_bet):
+    analysis_dict = {}
     if "-" not in chosen_season:
         chosen_season = int(chosen_season)
     sport = DataAnalysis(chosen_sport, df, int(chosen_league), chosen_season)
     perc_fav = sport.get_percentage_favourite()
+    analysis_dict["perc_fav"] = perc_fav
+    bet_on_fav = sport.report_bet_on_fav(int(chosen_bet))
+    analysis_dict["bet_on_fav"] = bet_on_fav
     sport.plot_season()
-    analysis_list["perc_fav"] = perc_fav
-
-    return analysis_list
+    return analysis_dict
 
 
 if __name__ == "__main__":
