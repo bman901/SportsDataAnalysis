@@ -2,6 +2,8 @@ var sport = GetURLParameter("sport");
 var chosen_league = 0;
 var chosen_season = 0;
 var chosen_bet = 10;
+var data = {};
+var analysis = {};
 
 window.onload = function () {
   if (sport.includes("-")) {
@@ -127,6 +129,27 @@ function GetChosenSeason() {
   }
 }
 
+function CreateInputs() {
+  $.ajax({
+    url: "",
+    type: "get",
+    contentType: "application/json",
+    data: {
+      chosen_sport: sport,
+      chosen_league: chosen_league,
+      chosen_season: chosen_season,
+      chosen_bet: chosen_bet,
+    },
+    success: function (response) {
+      analysis = response.analysis;
+      PercentageAnalysis(analysis);
+      PlotGraph();
+      CreateBetInput();
+      Report_Betting(analysis);
+    },
+  });
+}
+
 function GetAnalysisData() {
   $.ajax({
     url: "",
@@ -144,7 +167,6 @@ function GetAnalysisData() {
       PlotGraph();
       CreateBetInput();
       Report_Betting(analysis);
-      GetChosenBet();
     },
   });
 }
