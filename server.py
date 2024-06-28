@@ -33,13 +33,15 @@ def get_data(chosen_sport, leagues):
     for data in leagues:
         league_id = data["league_id"]
         current_season = data["current_season"]
+        seasons = list(reversed(data["previous_seasons"]))
+        seasons.insert(0, current_season)
         sport = DataAnalysis(chosen_sport, df, league_id, current_season)
         league_name = sport.get_league_name(league_id)
         league_list.append(
             {
                 "league_id": league_id,
                 "league_name": league_name,
-                "current_season": current_season,
+                "seasons": seasons,
                 "perc_fav": get_perc_fav(chosen_sport, league_id, current_season),
             }
         )

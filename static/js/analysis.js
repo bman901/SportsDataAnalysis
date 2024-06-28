@@ -110,17 +110,19 @@ function GetChosenLeague(data) {
   }
 }
 
-// Currently only loading current season
 function LoadAvailableSeasons(data, chosen_league) {
   document.getElementById("season_btns").innerHTML = "";
   for (let i = 0; i < data.length; i++) {
     if (data[i]["league_id"] == chosen_league) {
-      createBtn(
-        data[i]["current_season"],
-        data[i]["current_season"],
-        "season_btns",
-        "btn-secondary"
-      );
+      console.log(data[i]["seasons"]);
+      for (let j = 0; j < data[i]["seasons"].length; j++) {
+        createBtn(
+          data[i]["seasons"][j],
+          data[i]["seasons"][j],
+          "season_btns",
+          "btn-secondary"
+        );
+      }
     }
   }
 
@@ -137,8 +139,8 @@ function GetChosenSeason() {
       console.log(data);
       for (let i = 0; i < data.length; i++) {
         if (
-          data[i]["league_id"] == chosen_league &&
-          data[i]["current_season"] == chosen_season
+          data[i]["league_id"] == chosen_league
+          // && data[i]["current_season"] == chosen_season
         ) {
           document.getElementById("analysis_output").innerHTML =
             data[i]["perc_fav"];
