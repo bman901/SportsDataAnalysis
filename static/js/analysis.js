@@ -144,6 +144,7 @@ function GetAnalysisData() {
       PlotGraph();
       CreateBetInput();
       Report_Betting(analysis);
+      GetChosenBet();
     },
   });
 }
@@ -167,10 +168,19 @@ function Report_Betting(analysis) {
 }
 
 function GetChosenBet() {
-  let bet_input_val = document.querySelectorAll("betting_input");
+  let bet_input_val = document.getElementById("bet");
   bet_input_val.addEventListener("input", function () {
     chosen_bet = bet_input_val.value;
-    GetAnalysisData();
+    console.log(chosen_bet);
+    if (chosen_bet == "") {
+      document.getElementById("betting_output").innerHTML =
+        "Please enter a bet";
+    } else if (chosen_bet < 0) {
+      document.getElementById("betting_output").innerHTML =
+        "Please enter a positive number";
+    } else {
+      GetAnalysisData();
+    }
   });
 }
 
@@ -179,15 +189,17 @@ function PlotGraph() {
 }
 
 function CreateBetInput() {
-  document.getElementById("betting_input").innerHTML = "";
-  let bet_input = document.createElement("input");
-  bet_input.type = "text";
-  bet_input.id = "bet";
-  bet_input.inputmode = "decimal";
-  bet_input.pattern = "(^£$)|(^£d{1,3}(,d{3})*?$)"; // ^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$
-  bet_input.required = "";
-  bet_input.value = "10";
-  bet_input.class = "";
-  let body = document.getElementById("betting_input");
-  body.appendChild(bet_input);
+  if (document.getElementById("betting_input").innerHTML == "") {
+    let bet_input = document.createElement("input");
+    bet_input.type = "number";
+    bet_input.min = "0";
+    bet_input.id = "bet";
+    bet_input.inputmode = "decimal";
+    bet_input.pattern = "(^£$)|(^£d{1,3}(,d{3})*?$)"; // ^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$
+    bet_input.required = "";
+    bet_input.value = "10";
+    bet_input.class = "";
+    let body = document.getElementById("betting_input");
+    body.appendChild(bet_input);
+  }
 }
