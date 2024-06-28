@@ -82,6 +82,8 @@ function GetChosenLeague(data) {
     league_btn[i].addEventListener("click", function () {
       chosen_league = league_btn[i].id;
       LoadAvailableSeasons(data, chosen_league);
+      document.getElementById("season_text").innerHTML =
+        "Choose season to review:";
       document.getElementById("analysis_output").innerHTML =
         "Please choose a season to review";
     });
