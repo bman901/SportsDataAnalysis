@@ -2,6 +2,7 @@ var sport = GetURLParameter("sport");
 var chosen_league = 0;
 var chosen_season = 0;
 var data;
+var analysis;
 
 window.onload = function () {
   if (sport == "all-sports") {
@@ -13,27 +14,6 @@ window.onload = function () {
   }
   FillInTitle(capital_sport);
 };
-
-// $(document).ready(function () {
-//   $(".btn-secondary").click(function () {
-//     $.ajax({
-//       url: "",
-//       type: "get",
-//       contentType: "application/json",
-//       data: {
-//         chosen_sport: sport,
-//         chosen_league: chosen_league,
-//         chosen_season: chosen_season,
-//       },
-//       success: function (response) {
-//         let data = response.data;
-//         console.log(data);
-//         // document.getElementById("percentage_fav").innerHTML =
-//         //   data[0]["perc_fav"];
-//       },
-//     });
-//   });
-// });
 
 $(document).ready(function () {
   $.ajax({
@@ -114,7 +94,6 @@ function LoadAvailableSeasons(data, chosen_league) {
   document.getElementById("season_btns").innerHTML = "";
   for (let i = 0; i < data.length; i++) {
     if (data[i]["league_id"] == chosen_league) {
-      console.log(data[i]["seasons"]);
       for (let j = 0; j < data[i]["seasons"].length; j++) {
         createBtn(
           data[i]["seasons"][j],
@@ -135,17 +114,29 @@ function GetChosenSeason() {
   for (let i = 0; i < season_btn.length; i++) {
     season_btn[i].addEventListener("click", function () {
       chosen_season = season_btn[i].id;
-      console.log(chosen_league, chosen_season);
-      console.log(data);
-      for (let i = 0; i < data.length; i++) {
-        if (
-          data[i]["league_id"] == chosen_league
-          // && data[i]["current_season"] == chosen_season
-        ) {
-          document.getElementById("analysis_output").innerHTML =
-            data[i]["perc_fav"];
-        }
-      }
+      GetAnalysisData();
     });
   }
+}
+
+function GetAnalysisData() {
+  $.ajax({
+    url: "",
+    type: "get",
+    contentType: "application/json",
+    data: {
+      chosen_sport: sport,
+      chosen_league: chosen_league,
+      chosen_season: chosen_season,
+    },
+    success: function (response) {
+      analysis = response.analysis;
+      ReportAnalysis(analysis);
+    },
+  });
+}
+
+function ReportAnalysis(analysis) {
+  console.log(analysis);
+  document.getElementById("analysis_output").innerHTML = analysis["perc_fav"];
 }
