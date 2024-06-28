@@ -1,6 +1,9 @@
 """ Set up the Sport Analysis class which analyses the data frames passed in """
 
 import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from Tools.GetRoot import get_root
 
 from Tools.Sports.sport_class import Sport as SportClass
 from Tools.Sports.sports_dicts import leagues_dict
@@ -145,3 +148,22 @@ class DataAnalysis(SportClass):
             else:
                 won_lost = "won"
             return f"If you'd bet ${bet} on the favourites in every game in the {league_name} you would've {won_lost} ${abs(total_winnings):,.2f}"
+
+    def plot_season(self):
+        """Use MatPlotLib to plot the favourite win % in a given season for a league within a sport"""
+        x_axis = []
+        y_axis = []
+        league_name = self.get_league_name(self.get_league_id())
+        season = self.get_season()
+        percentage = self.percentage_fav_win()
+        if type(percentage) != str:
+            x_axis.append(season)
+            y_axis.append(percentage)
+        xpos = np.arange(len(x_axis))
+        plt.xticks(xpos, x_axis)
+        plt.ylabel("Percentage favourite win")
+        plt.title(f"Percentage favourite wins in the {league_name}")
+        plt.bar(xpos, y_axis)
+        proj_root = get_root.get_project_root()
+        plt.savefig(str(proj_root) + "/static/img/fav_plot.png")
+        plt.clf()

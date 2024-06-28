@@ -3,7 +3,7 @@ var chosen_league = 0;
 var chosen_season = 0;
 
 window.onload = function () {
-  if (sport == "all-sports") {
+  if (sport.includes("-")) {
     capital_sport = sport.replace("-", " ");
   } else if (sport == "afl") {
     capital_sport = sport.toUpperCase();
@@ -11,6 +11,7 @@ window.onload = function () {
     capital_sport = sport;
   }
   FillInTitle(capital_sport);
+  LoadImage(sport);
 };
 
 $(document).ready(function () {
@@ -75,6 +76,10 @@ function FillInTitle(sport) {
     .innerHTML.replace("?sport?", TitleCase(sport));
 }
 
+function LoadImage(sport) {
+  document.getElementById("sport_img").src = `../static/img/${sport}.jpg`;
+}
+
 function GetChosenLeague(data) {
   const league_btn = document.querySelectorAll(".btn-primary");
 
@@ -133,12 +138,13 @@ function GetAnalysisData() {
     },
     success: function (response) {
       analysis = response.analysis;
-      ReportAnalysis(analysis);
+      PercentageAnalysis(analysis);
+      PlotGraph();
     },
   });
 }
 
-function ReportAnalysis(analysis) {
+function PercentageAnalysis(analysis) {
   console.log(analysis);
   if (analysis["perc_fav"]) {
     document.getElementById("analysis_output").innerHTML = analysis["perc_fav"];
@@ -146,4 +152,8 @@ function ReportAnalysis(analysis) {
     document.getElementById("analysis_output").innerHTML =
       "No data for the chosen season";
   }
+}
+
+function PlotGraph() {
+  document.getElementById("sport_img").src = "../static/img/fav_plot.png";
 }

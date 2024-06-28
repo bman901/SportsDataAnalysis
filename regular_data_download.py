@@ -2,6 +2,7 @@
 (two days was chosen because that allows for timezone variance)"""
 
 from datetime import datetime, timedelta
+import time
 
 from Tools.Sports import sports_dicts
 from Tools.DataAccess.sports_data_class import SportsData
@@ -30,6 +31,9 @@ def save_data():
                 data_frame = sport.get_dataframe(data)
                 saved += sport.save_dataframe(data_frame)
                 count += 1
+                if count % 9 == 0:
+                    print("rate limit reached, waiting 60 seconds")
+                    time.sleep(60)
 
         print(
             f"Save complete: for {sport.get_sport()} {count} games found, {saved} downloaded"

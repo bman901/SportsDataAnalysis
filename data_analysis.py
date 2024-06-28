@@ -3,10 +3,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import os
 
 from Tools.DataAnalysis.data_analysis_class import DataAnalysis
 from Tools.Sports.sports_dicts import leagues_dict
+from Tools.GetRoot import get_root
 
 
 def get_all_sports(data, leagues):
@@ -64,9 +64,10 @@ def plot_percentage_favourite_all_sports():
     plt.ylabel("Percentage favourite win")
     plt.title("Percentage favourite wins by league")
     plt.bar(xpos, y_axis)
-    my_path = os.path.dirname(__file__)
-    plt.savefig(my_path + "/static/img/fav_plot.png")
+    proj_root = get_root.get_project_root()
+    plt.savefig(str(proj_root) + "/static/img/fav_plot.png")
     plt.show()
+    plt.clf()
 
 
 def bet_on_fav_all_sports(bet=10):
@@ -79,6 +80,6 @@ def bet_on_fav_all_sports(bet=10):
                 print(bet_return)
 
 
-report_percentage_favourite_all_sports_all_time()
-plot_percentage_favourite_all_sports()
+# report_percentage_favourite_all_sports_all_time()
+# plot_percentage_favourite_all_sports()
 # bet_on_fav_all_sports(20)
