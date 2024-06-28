@@ -138,5 +138,10 @@ function GetAnalysisData() {
 
 function ReportAnalysis(analysis) {
   console.log(analysis);
-  document.getElementById("analysis_output").innerHTML = analysis["perc_fav"];
+  if (analysis["perc_fav"]) {
+    document.getElementById("analysis_output").innerHTML = analysis["perc_fav"];
+  } else {
+    document.getElementById("analysis_output").innerHTML =
+      "No data for the chosen season";
+  }
 }
