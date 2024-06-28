@@ -1,8 +1,6 @@
 var sport = GetURLParameter("sport");
 var chosen_league = 0;
 var chosen_season = 0;
-var data;
-var analysis;
 
 window.onload = function () {
   if (sport == "all-sports") {
