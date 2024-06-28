@@ -1,6 +1,7 @@
 var sport = GetURLParameter("sport");
 var chosen_league = 0;
 var chosen_season = 0;
+var data;
 
 window.onload = function () {
   if (sport == "all-sports") {
@@ -13,22 +14,26 @@ window.onload = function () {
   FillInTitle(capital_sport);
 };
 
-$(document).ready(function () {
-  $(".btn").click(function () {
-    $.ajax({
-      url: "",
-      type: "get",
-      contentType: "application/json",
-      data: {
-        chosen_sport: sport,
-      },
-      success: function (response) {
-        document.getElementById("percentage_fav").innerHTML =
-          data[0]["perc_fav"];
-      },
-    });
-  });
-});
+// $(document).ready(function () {
+//   $(".btn-secondary").click(function () {
+//     $.ajax({
+//       url: "",
+//       type: "get",
+//       contentType: "application/json",
+//       data: {
+//         chosen_sport: sport,
+//         chosen_league: chosen_league,
+//         chosen_season: chosen_season,
+//       },
+//       success: function (response) {
+//         let data = response.data;
+//         console.log(data);
+//         // document.getElementById("percentage_fav").innerHTML =
+//         //   data[0]["perc_fav"];
+//       },
+//     });
+//   });
+// });
 
 $(document).ready(function () {
   $.ajax({
@@ -39,7 +44,7 @@ $(document).ready(function () {
       chosen_sport: sport,
     },
     success: function (response) {
-      var data = response.data;
+      data = response.data;
 
       for (let i = 0; i < data.length; i++) {
         createBtn(
@@ -73,7 +78,6 @@ function createBtn(btn_name, btn_id, location, class_name) {
   btn.textContent = btn_name;
   let body = document.getElementById(location);
   body.appendChild(btn);
-  // document.body.appendChild(btn);
 }
 
 function TitleCase(str) {
@@ -100,6 +104,8 @@ function GetChosenLeague(data) {
     league_btn[i].addEventListener("click", function () {
       chosen_league = league_btn[i].id;
       LoadAvailableSeasons(data, chosen_league);
+      document.getElementById("analysis_output").innerHTML =
+        "Please choose a season to review";
     });
   }
 }
@@ -128,6 +134,16 @@ function GetChosenSeason() {
     season_btn[i].addEventListener("click", function () {
       chosen_season = season_btn[i].id;
       console.log(chosen_league, chosen_season);
+      console.log(data);
+      for (let i = 0; i < data.length; i++) {
+        if (
+          data[i]["league_id"] == chosen_league &&
+          data[i]["current_season"] == chosen_season
+        ) {
+          document.getElementById("analysis_output").innerHTML =
+            data[i]["perc_fav"];
+        }
+      }
     });
   }
 }

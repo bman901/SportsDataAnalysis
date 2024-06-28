@@ -17,6 +17,8 @@ def home():
 def analysis():
     if request.is_json:
         chosen_sport = request.args.get("chosen_sport")
+        chosen_league = request.args.get("chosen_league")
+        chosen_season = request.args.get("chosen_season")
         sport_class = Sport(chosen_sport)
         leagues = sport_class.get_leagues()
         result = get_data(chosen_sport, leagues)
