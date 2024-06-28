@@ -166,3 +166,4 @@ class DataAnalysis(SportClass):
         plt.bar(xpos, y_axis)
         proj_root = get_root.get_project_root()
         plt.savefig(str(proj_root) + "/static/img/fav_plot.png")
+        plt.clf()

@@ -2,6 +2,9 @@ from flask import Flask, render_template, url_for, request, jsonify
 from Tools.Sports.sports_dicts import leagues_dict
 from data_analysis import *
 from Tools.Sports.sport_class import Sport
+import matplotlib
+
+matplotlib.use("agg")
 
 app = Flask(__name__)
 
@@ -59,6 +62,7 @@ def get_anaylsis(chosen_sport, chosen_league, chosen_season):
         chosen_season = int(chosen_season)
     sport = DataAnalysis(chosen_sport, df, int(chosen_league), chosen_season)
     perc_fav = sport.get_percentage_favourite()
+    sport.plot_season()
     analysis_list["perc_fav"] = perc_fav
 
     return analysis_list

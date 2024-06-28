@@ -67,6 +67,7 @@ def plot_percentage_favourite_all_sports():
     proj_root = get_root.get_project_root()
     plt.savefig(str(proj_root) + "/static/img/fav_plot.png")
     plt.show()
+    plt.clf()
 
 
 def bet_on_fav_all_sports(bet=10):

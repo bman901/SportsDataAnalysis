@@ -138,12 +138,13 @@ function GetAnalysisData() {
     },
     success: function (response) {
       analysis = response.analysis;
-      ReportAnalysis(analysis);
+      PercentageAnalysis(analysis);
+      PlotGraph();
     },
   });
 }
 
-function ReportAnalysis(analysis) {
+function PercentageAnalysis(analysis) {
   console.log(analysis);
   if (analysis["perc_fav"]) {
     document.getElementById("analysis_output").innerHTML = analysis["perc_fav"];
@@ -151,4 +152,8 @@ function ReportAnalysis(analysis) {
     document.getElementById("analysis_output").innerHTML =
       "No data for the chosen season";
   }
+}
+
+function PlotGraph() {
+  document.getElementById("sport_img").src = "../static/img/fav_plot.png";
 }
