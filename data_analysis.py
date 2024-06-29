@@ -36,14 +36,16 @@ def report_percentage_favourite_all_seasons(sport, league_id):
                         prev_season_analysis.report_percentage_favourite()
 
 
-def report_percentage_favourite_all_sports_all_time():
+def report_percentage_favourite_all_sports():
     """Report the percentage favourite in each sport"""
+    result = {}
     for data in leagues_dict:
         for league in data["leagues"]:
             data_analysis = get_all_sports(data, league)
             report = data_analysis.get_percentage_favourite()
             if report:
-                print(report)
+                result[data["sport"]] = {"perc_fav": report}
+    return result
 
 
 def plot_percentage_favourite_all_sports():
@@ -70,7 +72,7 @@ def plot_percentage_favourite_all_sports():
     plt.clf()
 
 
-def bet_on_fav_all_sports_all_time(bet=10):
+def bet_on_fav_all_sports(bet=10):
     """Establish how much you would win or lose if betting on the favourite in each game"""
     for data in leagues_dict:
         for league in data["leagues"]:
@@ -80,6 +82,6 @@ def bet_on_fav_all_sports_all_time(bet=10):
                 print(bet_return)
 
 
-# report_percentage_favourite_all_sports_all_time()
+# report_percentage_favourite_all_sports() - This won't work at the moment
 # plot_percentage_favourite_all_sports()
-bet_on_fav_all_sports_all_time(20)
+# bet_on_fav_all_sports(20)
