@@ -190,4 +190,16 @@ baseball,154433,1,MLB,2024,17,Los Angeles Angels,26,Oakland Athletics,home,1.726
 baseball,154434,1,MLB,2024,30,San Diego Padres,37,Washington Nationals,home,1.5223076923076924,2.596923076923077,10000.0,home
 baseball,154435,1,MLB,2024,4,Baltimore Orioles,9,Cleveland Guardians,home,1.4253846153846153,2.9353846153846153,10000.0,home
 baseball,154437,1,MLB,2024,24,New York Mets,25,New York Yankees,home,2.079230769230769,1.7807692307692309,10000.0,home
-baseball,154438,1,MLB,2024,33,St.Louis Cardinals,3,Atlanta Braves,home,2.056153846153846,1.8053846153846154,10000.0,home
+baseball,154438,1,MLB,2024,33,St.Louis Cardinals,3,Atlanta Braves,home,2.056153846153846,1.8053846153846151,10000.0,home
+baseball,154439,1,MLB,2024,7,Chicago White Sox,18,Los Angeles Dodgers,away,2.4507692307692306,1.573076923076923,10000.0,home
+baseball,154431,1,MLB,2024,2,Arizona Diamondbacks,22,Minnesota Twins,away,2.036923076923077,1.8084615384615383,10000.0,home
+baseball,154440,1,MLB,2024,31,San Francisco Giants,6,Chicago Cubs,home,1.8584615384615384,1.98,10000.0,home
+baseball,154442,1,MLB,2024,2,Arizona Diamondbacks,22,Minnesota Twins,away,1.96,1.8707692307692307,10000.0,home
+baseball,154441,1,MLB,2024,31,San Francisco Giants,6,Chicago Cubs,away,1.9215384615384616,1.9053846153846152,10000.0,home
+baseball,153313,1,MLB,2024,7,Chicago White Sox,3,Atlanta Braves,home,3.4261538461538463,1.333846153846154,10000.0,home
+baseball,154443,1,MLB,2024,27,Philadelphia Phillies,19,Miami Marlins,away,1.333846153846154,3.383076923076923,10000.0,home
+baseball,154444,1,MLB,2024,4,Baltimore Orioles,35,Texas Rangers,home,1.4884615384615385,2.7146153846153847,10000.0,home
+baseball,154445,1,MLB,2024,36,Toronto Blue Jays,25,New York Yankees,home,2.1323076923076925,1.7476923076923077,10000.0,home
+baseball,154446,1,MLB,2024,33,St.Louis Cardinals,8,Cincinnati Reds,away,1.6876923076923076,2.220769230769231,10000.0,home
+basketball,384862,13,NBA W,2024,165,Dallas Wings W,169,Minnesota Lynx W,home,4.598,1.1973333333333334,10000.0,home
+basketball,384863,13,NBA W,2024,163,Chicago Sky W,167,Las Vegas Aces W,away,5.264,1.162,10000.0,home
