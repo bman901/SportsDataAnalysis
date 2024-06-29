@@ -40,7 +40,7 @@ def save_data():
         )
 
 
-# save_data()
+save_data()
 
 
 def fill_in_dates():

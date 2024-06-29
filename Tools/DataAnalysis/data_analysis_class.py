@@ -57,31 +57,35 @@ class DataAnalysis(SportClass):
         equaldf = df[df[column1] == df[column2]]
         return equaldf
 
-    def get_season_df(self, data_frame):
+    def get_sport_df(self, data_frame):
+        """Get a specific dataframe for the league chosen i.e. only review the league chosen"""
         df = pd.DataFrame(data=data_frame)
         sport = self.get_sport()
-        league_id = self.get_league_id()
-        season = self.get_season()
         df_sport = df[df["sport"] == sport]
+        return df_sport
+
+    def get_league_df(self, data_frame):
+        """Get a specific dataframe for the league chosen i.e. only review the league chosen"""
+        league_id = self.get_league_id()
+        df_sport = self.get_sport_df(data_frame)
         df_league = df_sport[df_sport["league_id"] == league_id]
+        return df_league
+
+    def get_season_df(self, data_frame):
+        """Get a specific dataframe for the season chosen i.e. only review the season chosen"""
+        season = self.get_season()
+        df_league = self.get_league_df(data_frame)
         df_season = df_league[df_league["season"] == season]
         return df_season
 
     def count_specific_dataframe_length(self, data_frame):
-        """Count all columns for a specific league and season"""
-        df_season = self.get_season_df(data_frame)
-        count = len(df_season)
-        return count
-
-    def count_self_dataframe_length(self):
-        """Count all columns for a specific league and season"""
-        df_season = self.get_season_df(self.get_data_frame())
-        count = len(df_season)
+        """Count all rows for a specific dataframe"""
+        count = len(data_frame)
         return count
 
     def percentage_fav_win(self):
         """Calculate the percentage of favourite wins"""
-        df = self.get_data_frame()
+        df = self.get_season_df(self.get_data_frame())
         equal = self.compare_equal(df, "result", "favourite")
         favourite_wins = self.count_specific_dataframe_length(equal)
         total_games = self.count_specific_dataframe_length(df)
@@ -120,8 +124,10 @@ class DataAnalysis(SportClass):
             print("No data for the chosen season")
 
     def get_bet_on_fav(self, bet):
-        """Report the winnings if you'd bet on the favourite every game within a sport & league"""
-        total_games = self.count_self_dataframe_length()
+        """Report the winnings if you'd bet on the favourite every game within a sport & league for the chosen season"""
+        total_games = self.count_specific_dataframe_length(
+            self.get_season_df(self.get_data_frame())
+        )
         if total_games == 0:
             pass
         else:

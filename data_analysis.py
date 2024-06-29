@@ -82,4 +82,4 @@ def bet_on_fav_all_sports_all_time(bet=10):
 
 # report_percentage_favourite_all_sports_all_time()
 # plot_percentage_favourite_all_sports()
-# bet_on_fav_all_sports_all_time(20)
+bet_on_fav_all_sports_all_time(20)
