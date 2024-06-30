@@ -41,29 +41,3 @@ def save_data():
 
 
 save_data()
-
-
-def fill_in_dates():
-    """
-    Works through the leagues specified in the leagues dictionary and downloads games and odds from two days ago
-    """
-    date = "2024-06-20"
-
-    for data in sports_dicts.leagues_dict:
-        sport = SportsData(data["sport"])
-        count = 0
-        for i in data["leagues"]:
-            league_id = i["league_id"]
-            current_season = i["current_season"]
-            games = sport.get_games(league_id, current_season, date)
-            for result in range(len(games["response"])):
-                data = sport.fill_in_game_dates(games, result)
-                count += 1
-                # if count % 9 == 0:
-                #     print("rate limit reached, waiting 60 seconds")
-                #     time.sleep(60)
-
-        print(f"Save complete: for {sport.get_sport()} {count} games found")
-
-
-fill_in_dates()

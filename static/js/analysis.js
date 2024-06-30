@@ -44,6 +44,14 @@ function GetURLParameter(sParam) {
   }
 }
 
+function createRows(row_id, location, class_name = "") {
+  let row = document.createElement("div");
+  row.className = "row " + class_name;
+  row.id = row_id;
+  let body = document.getElementById(location);
+  body.appendChild(row);
+}
+
 function createBtn(btn_name, btn_id, location, class_name) {
   let btn = document.createElement("button");
   btn.className = "btn " + class_name;
@@ -76,10 +84,11 @@ function LoadImage(sport) {
 
 function CreateLeagueBtns(data) {
   for (let i = 0; i < data.length; i++) {
+    createRows(`league_row${i}`, "league_btns", "m-2");
     createBtn(
       data[i]["league_name"],
       data[i]["league_id"],
-      "league_btns",
+      `league_row${i}`,
       "btn-primary"
     );
   }
@@ -111,10 +120,11 @@ function LoadAvailableSeasons(data, chosen_league) {
   for (let i = 0; i < data.length; i++) {
     if (data[i]["league_id"] == chosen_league) {
       for (let j = 0; j < data[i]["seasons"].length; j++) {
+        createRows(`season_row${j}`, "season_btns", "m-2");
         createBtn(
           data[i]["seasons"][j],
           data[i]["seasons"][j],
-          "season_btns",
+          `season_row${j}`,
           "btn-secondary"
         );
       }

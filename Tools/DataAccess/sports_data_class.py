@@ -228,7 +228,8 @@ class SportsData(SportClass):
                 return data_export
 
     def fill_in_game_dates(self, games, index):
-        df = pd.read_csv("sportsdata2.csv")
+        """Used to fill in game dates as this wasn't originally part of the downloaded data"""
+        df = pd.read_csv("sportsdata.csv")
         # df.insert(2, "game_date", "")
         if self.get_sport() == "afl":
             game_id = games["response"][index]["game"]["id"]
@@ -243,7 +244,7 @@ class SportsData(SportClass):
             if value == game_id:
                 index = df.loc[(df == value).any(axis=1)].index[0]
                 df.loc[index, "game_date"] = game_date
-                df.to_csv("sportsdata2.csv", index=False)
+                df.to_csv("sportsdata.csv", index=False)
 
     def get_dataframe(self, data_input):
         df = pd.DataFrame(data=data_input)

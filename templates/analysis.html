@@ -1,44 +1,51 @@
 {% extends "layout.html" %} {% block content %}
 
-<h1 id="title">?sport?</h1>
-
-<div>
-  <img
-    id="sport_img"
-    class="img-fluid mx-auto d-block half-size"
-    alt="Image of the chosen sport"
-  />
+<div class="row text-center">
+  <h1 id="title">?sport?</h1>
 </div>
 
-<div>
-  <p>Choose league to review:</p>
-</div>
+<div class="row">
+  <div class="col-2 rounded border border-primary">
+    <div>
+      <p>Choose league to review:</p>
+    </div>
 
-<div id="league_btns"></div>
+    <div id="league_btns"></div>
+  </div>
 
-<br />
+  <div class="col-2 rounded border border-primary">
+    <div id="season_text">
+      <p></p>
+    </div>
 
-<div id="season_text">
-  <p></p>
-</div>
+    <div id="season_btns"></div>
+    <br />
+  </div>
 
-<div id="season_btns"></div>
-<br />
+  <div class="col-8 rounded border border-primary">
+    <div>
+      <img
+        id="sport_img"
+        class="img-fluid mx-auto d-block half-size"
+        alt="Image of the chosen sport"
+      />
+    </div>
+    <div>
+      <p id="perc_fav">Please choose a league to review</p>
+    </div>
 
-<div>
-  <p id="perc_fav">Please choose a league to review</p>
-</div>
+    <div>
+      <p id="betting_input_text"></p>
+    </div>
 
-<div>
-  <p id="betting_input_text"></p>
-</div>
+    <div>
+      <p id="betting_input"></p>
+    </div>
 
-<div>
-  <p id="betting_input"></p>
-</div>
-
-<div>
-  <p id="betting_output"></p>
+    <div>
+      <p id="betting_output"></p>
+    </div>
+  </div>
 </div>
 
 <script src="{{ url_for('static', filename = 'js/analysis.js') }}"></script>
