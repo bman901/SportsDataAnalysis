@@ -187,10 +187,13 @@ class SportsData(SportClass):
         else:
             if self.get_sport() == "afl":
                 game_id = games["response"][index]["game"]["id"]
+                game_date = games["response"][index]["date"]
             elif self.get_sport() == "football":
                 game_id = games["response"][index]["fixture"]["id"]
+                game_date = games["response"][index]["fixture"]["date"]
             else:
                 game_id = games["response"][index]["id"]
+                game_date = games["response"][index]["date"]
             odds = self.get_odds(game_id)
             if odds["results"] != 0:
                 teams = games["response"][index]["teams"]
@@ -207,6 +210,7 @@ class SportsData(SportClass):
                 data_export = {
                     "sport": [self.get_sport()],
                     "game_id": [game_id],
+                    "game_date": [game_date],
                     "league_id": [league_id],
                     "league_name": [league_name],
                     "season": [season],
@@ -222,6 +226,25 @@ class SportsData(SportClass):
                 }
 
                 return data_export
+
+    def fill_in_game_dates(self, games, index):
+        """Used to fill in game dates as this wasn't originally part of the downloaded data"""
+        df = pd.read_csv("sportsdata.csv")
+        # df.insert(2, "game_date", "")
+        if self.get_sport() == "afl":
+            game_id = games["response"][index]["game"]["id"]
+            game_date = games["response"][index]["date"]
+        elif self.get_sport() == "football":
+            game_id = games["response"][index]["fixture"]["id"]
+            game_date = games["response"][index]["fixture"]["date"]
+        else:
+            game_id = games["response"][index]["id"]
+            game_date = games["response"][index]["date"]
+        for value in df["game_id"]:
+            if value == game_id:
+                index = df.loc[(df == value).any(axis=1)].index[0]
+                df.loc[index, "game_date"] = game_date
+                df.to_csv("sportsdata.csv", index=False)
 
     def get_dataframe(self, data_input):
         df = pd.DataFrame(data=data_input)

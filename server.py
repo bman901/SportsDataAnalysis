@@ -23,13 +23,18 @@ def analysis():
         chosen_league = request.args.get("chosen_league")
         chosen_season = request.args.get("chosen_season")
         chosen_bet = request.args.get("chosen_bet")
-        sport_class = Sport(chosen_sport)
-        leagues = sport_class.get_leagues()
-        result = get_data(chosen_sport, leagues)
-        if chosen_season:
-            result["analysis"] = get_anaylsis(
-                chosen_sport, chosen_league, chosen_season, chosen_bet
-            )
+        if chosen_sport != "all-sports":
+            sport_class = Sport(chosen_sport)
+            leagues = sport_class.get_leagues()
+            result = get_data(chosen_sport, leagues)
+            if chosen_season:
+                result["analysis"] = get_anaylsis(
+                    chosen_sport, chosen_league, chosen_season, chosen_bet
+                )
+        else:
+            result = {}
+            result["data"] = report_percentage_favourite_all_sports()
+            print(result["data"])
         return jsonify(result)
     return render_template("analysis.html", sports=leagues_dict)
 
@@ -49,7 +54,6 @@ def get_data(chosen_sport, leagues):
                 "league_id": league_id,
                 "league_name": league_name,
                 "seasons": seasons,
-                # "perc_fav": get_perc_fav(chosen_sport, league_id, current_season),
             }
         )
     result["data"] = league_list
