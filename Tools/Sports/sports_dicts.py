@@ -132,6 +132,18 @@ leagues_dict = [
                 "previous_seasons": one_year_previous,
             },
             {
+                "league_id": 40,
+                "league_name": "English Championship",
+                "current_season": one_year,
+                "previous_seasons": one_year_previous,
+            },
+            {
+                "league_id": 44,
+                "league_name": "FA WSL",
+                "current_season": one_year,
+                "previous_seasons": one_year_previous,
+            },
+            {
                 "league_id": 140,
                 "league_name": "La Liga",
                 "current_season": one_year,
