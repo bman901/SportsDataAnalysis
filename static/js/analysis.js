@@ -166,21 +166,25 @@ function GetAnalysisData() {
       analysis = response.analysis;
       PercentageAnalysis(analysis);
       PlotGraph();
-      Report_Betting(analysis);
+      ReportBetting(analysis);
     },
   });
 }
 
 function PercentageAnalysis(analysis) {
-  if (analysis["perc_fav"]) {
-    document.getElementById("perc_fav").innerHTML = analysis["perc_fav"];
+  let perc_fav = analysis["perc_fav"] * 100;
+  let chosen_league_name = analysis["league_name"];
+  if (perc_fav) {
+    document.getElementById(
+      "perc_fav"
+    ).innerHTML = `In the ${chosen_season} season of the ${chosen_league_name}, the favourite won ${perc_fav}% of the time`;
   } else {
     document.getElementById("perc_fav").innerHTML =
       "No data for the chosen season";
   }
 }
 
-function Report_Betting(analysis) {
+function ReportBetting(analysis) {
   if (analysis["bet_on_fav"]) {
     document.getElementById("betting_output").innerHTML =
       analysis["bet_on_fav"];

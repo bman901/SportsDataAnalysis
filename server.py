@@ -66,8 +66,10 @@ def get_anaylsis(chosen_sport, chosen_league, chosen_season, chosen_bet):
     if "-" not in chosen_season:
         chosen_season = int(chosen_season)
     sport = DataAnalysis(chosen_sport, df, int(chosen_league), chosen_season)
-    perc_fav = sport.get_percentage_favourite()
+    perc_fav = round(sport.percentage_fav_win(), 4)
     analysis_dict["perc_fav"] = perc_fav
+    league_name = sport.get_league_name(int(chosen_league))
+    analysis_dict["league_name"] = league_name
     bet_on_fav = sport.report_bet_on_fav(int(chosen_bet))
     analysis_dict["bet_on_fav"] = bet_on_fav
     sport.plot_season()
