@@ -42,7 +42,7 @@ def report_percentage_favourite_all_sports():
     for data in leagues_dict:
         for league in data["leagues"]:
             data_analysis = get_all_sports(data, league)
-            report = data_analysis.get_percentage_favourite()
+            report = data_analysis.report_percentage_favourite()
             if report:
                 result[data["sport"]] = {"perc_fav": report}
     return result
