@@ -4,6 +4,7 @@ var chosen_season = 0;
 var chosen_bet = 10;
 var data = {};
 var analysis = {};
+var perc_chart = 0;
 
 window.onload = function () {
   if (sport.includes("-")) {
@@ -79,7 +80,18 @@ function FillInTitle(sport) {
 }
 
 function LoadImage(sport) {
-  document.getElementById("sport_img").src = `../static/img/${sport}.jpg`;
+  let sport_img = document.getElementById("sport_img");
+  if (sport_img) {
+    sport_img.src = `../static/img/${sport}.jpg`;
+  } else {
+    let image = document.createElement("IMG");
+    image.id = "sport_img";
+    image.className = "img-fluid d-block half-size";
+    image.alt = "Image of the chosen sport";
+    image.src = `../static/img/${sport}.jpg`;
+    let body = document.getElementById("img-div");
+    body.appendChild(image);
+  }
 }
 
 function CreateLeagueBtns(data) {
@@ -116,6 +128,7 @@ function GetChosenLeague() {
 // Add an All Seasons button?
 
 function LoadAvailableSeasons(data, chosen_league) {
+  LoadImage(sport);
   document.getElementById("season_btns").innerHTML = "";
   for (let i = 0; i < data.length; i++) {
     if (data[i]["league_id"] == chosen_league) {
@@ -165,7 +178,7 @@ function GetAnalysisData() {
     success: function (response) {
       analysis = response.analysis;
       PercentageAnalysis(analysis);
-      PlotGraph();
+      chart = createChart(analysis);
       ReportBetting(analysis);
     },
   });
@@ -209,10 +222,6 @@ function GetChosenBet() {
   });
 }
 
-function PlotGraph() {
-  document.getElementById("sport_img").src = "../static/img/fav_plot.png";
-}
-
 function CreateBetInput() {
   if (document.getElementById("betting_input").innerHTML == "") {
     let bet_input = document.createElement("input");
@@ -228,4 +237,32 @@ function CreateBetInput() {
     let body = document.getElementById("betting_input");
     body.appendChild(bet_input);
   }
+}
+
+function createChart(analysis) {
+  const ctx = document.getElementById("perc_graph");
+  let perc_fav = analysis["perc_fav"] * 100;
+
+  document.getElementById("sport_img").remove();
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: [chosen_season],
+      datasets: [
+        {
+          label: "% wins by favourites",
+          data: [perc_fav],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
 }
