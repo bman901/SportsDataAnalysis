@@ -108,7 +108,7 @@ function GetChosenLeague() {
       document.getElementById("season_text").innerHTML =
         "Choose season to review:";
       document.getElementById("perc_fav").innerHTML =
-        "Please choose a season to review";
+        "<-- Please choose a season to review";
     });
   }
 }
