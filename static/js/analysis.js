@@ -129,6 +129,7 @@ function GetChosenLeague() {
 
 function LoadAvailableSeasons(data, chosen_league) {
   LoadImage(sport);
+  clearGraph();
   document.getElementById("season_btns").innerHTML = "";
   for (let i = 0; i < data.length; i++) {
     if (data[i]["league_id"] == chosen_league) {
@@ -178,7 +179,7 @@ function GetAnalysisData() {
     success: function (response) {
       analysis = response.analysis;
       PercentageAnalysis(analysis);
-      chart = createChart(analysis);
+      createChart(analysis);
       ReportBetting(analysis);
     },
   });
@@ -233,19 +234,26 @@ function CreateBetInput() {
       "^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$";
     bet_input.required = "";
     bet_input.value = "10";
-    bet_input.class = "";
+    bet_input.className = "";
     let body = document.getElementById("betting_input");
     body.appendChild(bet_input);
   }
 }
 
 function createChart(analysis) {
+  clearGraph();
+  let new_canvas = document.createElement("canvas");
+  new_canvas.id = "perc_graph";
+  let body = document.getElementById("canvas-div");
+  body.appendChild(new_canvas);
   const ctx = document.getElementById("perc_graph");
   let perc_fav = analysis["perc_fav"] * 100;
+  let sport_img = document.getElementById("sport_img");
+  if (sport_img) {
+    sport_img.remove();
+  }
 
-  document.getElementById("sport_img").remove();
-
-  new Chart(ctx, {
+  const myChart = new Chart(ctx, {
     type: "bar",
     data: {
       labels: [chosen_season],
@@ -265,4 +273,11 @@ function createChart(analysis) {
       },
     },
   });
+}
+
+function clearGraph() {
+  let perc_graph = document.getElementById("perc_graph");
+  if (perc_graph) {
+    perc_graph.remove();
+  }
 }
