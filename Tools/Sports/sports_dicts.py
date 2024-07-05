@@ -23,7 +23,7 @@ calendar_year = year
 # For calendar year seasons
 previous_seasons_calendar = []
 
-for i in range(2021, year):  # TEMP to test; change back to 2024 when done
+for i in range(2024, year):  # TEMP to test; change back to 2024 when done
     previous_seasons_calendar.append(i)
 
 # For seasons every 4 years
@@ -113,12 +113,12 @@ leagues_dict = [
                 "current_season": calendar_year,
                 "previous_seasons": euros_seasons,
             },
-            {
-                "league_id": 1,
-                "league_name": "World Cup",
-                "current_season": calendar_year,
-                "previous_seasons": football_wc_seasons,
-            },
+            # {
+            #     "league_id": 1,
+            #     "league_name": "World Cup",
+            #     "current_season": calendar_year,
+            #     "previous_seasons": football_wc_seasons,
+            # },
             {
                 "league_id": 5,
                 "league_name": "UEFA Nations League",
@@ -227,12 +227,12 @@ leagues_dict = [
         "sport": "rugby",
         "version": "v1",
         "leagues": [
-            {
-                "league_id": 25,
-                "league_name": "Six Nations",
-                "current_season": calendar_year,
-                "previous_seasons": previous_seasons_calendar,
-            },
+            # {
+            #     "league_id": 25,
+            #     "league_name": "Six Nations",
+            #     "current_season": calendar_year,
+            #     "previous_seasons": previous_seasons_calendar,
+            # },
             {
                 "league_id": 85,
                 "league_name": "Rugby Championship",
@@ -245,12 +245,12 @@ leagues_dict = [
                 "current_season": calendar_year,
                 "previous_seasons": previous_seasons_calendar,
             },
-            {
-                "league_id": 69,
-                "league_name": "World Cup",
-                "current_season": calendar_year,
-                "previous_seasons": rugby_wc_seasons,
-            },
+            # {
+            #     "league_id": 69,
+            #     "league_name": "World Cup",
+            #     "current_season": calendar_year,
+            #     "previous_seasons": rugby_wc_seasons,
+            # },
         ],
     },
     {
