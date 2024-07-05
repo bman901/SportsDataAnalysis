@@ -116,6 +116,7 @@ function GetChosenLeague() {
       chosen_league = league_btn[i].id;
     });
     league_btn[i].addEventListener("click", function () {
+      clearBetting();
       LoadAvailableSeasons(data, chosen_league);
       document.getElementById("season_text").innerHTML =
         "Choose season to review:";
@@ -159,6 +160,7 @@ function GetChosenSeason() {
       GetAnalysisData();
     });
     season_btn[i].addEventListener("click", function () {
+      createBetInputText();
       CreateBetInput();
       GetChosenBet();
     });
@@ -178,15 +180,18 @@ function GetAnalysisData() {
     },
     success: function (response) {
       analysis = response.analysis;
-      PercentageAnalysis(analysis);
-      createChart(analysis);
-      ReportBetting(analysis);
+      let perc_fav = analysis["perc_fav"];
+      if (perc_fav) {
+        createChart(analysis);
+        PercentageAnalysis(analysis);
+        ReportBetting(analysis);
+      }
     },
   });
 }
 
 function PercentageAnalysis(analysis) {
-  let perc_fav = analysis["perc_fav"] * 100;
+  let perc_fav = Math.round(analysis["perc_fav"] * 100);
   let chosen_league_name = analysis["league_name"];
   if (perc_fav) {
     document.getElementById(
@@ -221,6 +226,11 @@ function GetChosenBet() {
       GetAnalysisData();
     }
   });
+}
+
+function createBetInputText() {
+  bettingInputText = document.getElementById("betting_input_text");
+  bettingInputText.innerHTML = "Enter amount to bet per game:";
 }
 
 function CreateBetInput() {
@@ -280,4 +290,10 @@ function clearGraph() {
   if (perc_graph) {
     perc_graph.remove();
   }
+}
+
+function clearBetting() {
+  document.getElementById("betting_input_text").innerHTML = "";
+  document.getElementById("betting_input").innerHTML = "";
+  document.getElementById("betting_output").innerHTML = "";
 }
