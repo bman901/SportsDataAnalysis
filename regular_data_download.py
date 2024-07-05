@@ -25,15 +25,15 @@ def save_data():
             current_season = i["current_season"]
             games = sport.get_games(league_id, current_season, date)
             for result in range(len(games["response"])):
-                if count % 9 == 0:
-                    print("rate limit reached, waiting 60 seconds")
-                    time.sleep(60)
                 data = sport.get_dataframe_data(
                     games, result, league_id, league_name, current_season
                 )
                 data_frame = sport.get_dataframe(data)
                 saved += sport.save_dataframe(data_frame)
                 count += 1
+                if count % 9 == 0:
+                    print("rate limit reached, waiting 60 seconds")
+                    time.sleep(60)
 
         print(
             f"Save complete: for {sport.get_sport()} {count} games found, {saved} downloaded"
