@@ -10,11 +10,12 @@
     "parcel": "^2.6.2"
   },
   "dependencies": {
+    "@cubejs-client/core": "^0.31.0",
+    "chart.js": "^4.0.0",
+    "eslint": "^9.6.0",
     "pathlib": "^0.1.2",
     "requests": "^0.3.0",
     "tenacity": "^1.0.4",
-    "tqdm": "^2.0.3",
-    "@cubejs-client/core": "^0.31.0",
-    "chart.js": "^4.0.0"
+    "tqdm": "^2.0.3"
   }
 }
