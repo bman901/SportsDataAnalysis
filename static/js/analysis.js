@@ -194,9 +194,8 @@ function PercentageAnalysis(analysis) {
   let perc_fav = Math.round(analysis["perc_fav"] * 100);
   let chosen_league_name = analysis["league_name"];
   if (perc_fav) {
-    document.getElementById(
-      "perc_fav"
-    ).innerHTML = `In the ${chosen_season} season of the ${chosen_league_name}, the favourite won ${perc_fav}% of the time`;
+    document.getElementById("perc_fav").innerHTML =
+      `In the ${chosen_season} season of the ${chosen_league_name}, the favourite won ${perc_fav}% of the time`;
   } else {
     document.getElementById("perc_fav").innerHTML =
       "No data for the chosen season";
@@ -212,11 +211,10 @@ function ReportBetting(analysis) {
     if (totalWinnings < 0) {
       outcome = "lost";
     }
-    document.getElementById(
-      "betting_output"
-    ).innerHTML = `If you'd bet $${chosen_bet} on the favourites in every game in the ${chosen_league_name} you would've ${outcome} $${Math.abs(
-      roundedWinnings
-    )}`;
+    document.getElementById("betting_output").innerHTML =
+      `If you'd bet $${chosen_bet} on the favourites in every game in the ${chosen_league_name} you would've ${outcome} $${Math.abs(
+        roundedWinnings
+      )}`;
   } else {
     document.getElementById("betting_output").innerHTML = "";
   }
@@ -231,11 +229,10 @@ function updateBetting(chosen_bet) {
     if (totalWinnings < 0) {
       outcome = "lost";
     }
-    document.getElementById(
-      "betting_output"
-    ).innerHTML = `If you'd bet $${chosen_bet} on the favourites in every game in the ${chosen_league_name} you would've ${outcome} $${Math.abs(
-      roundedWinnings
-    )}`;
+    document.getElementById("betting_output").innerHTML =
+      `If you'd bet $${chosen_bet} on the favourites in every game in the ${chosen_league_name} you would've ${outcome} $${Math.abs(
+        roundedWinnings
+      )}`;
   } else {
     document.getElementById("betting_output").innerHTML = "";
   }
