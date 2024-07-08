@@ -204,9 +204,38 @@ function PercentageAnalysis(analysis) {
 }
 
 function ReportBetting(analysis) {
-  if (analysis["bet_on_fav"]) {
-    document.getElementById("betting_output").innerHTML =
-      analysis["bet_on_fav"];
+  let chosen_league_name = analysis["league_name"];
+  let totalWinnings = analysis["bet_on_fav"];
+  let roundedWinnings = totalWinnings.toFixed(2);
+  let outcome = "won";
+  if (totalWinnings) {
+    if (totalWinnings < 0) {
+      outcome = "lost";
+    }
+    document.getElementById(
+      "betting_output"
+    ).innerHTML = `If you'd bet $${chosen_bet} on the favourites in every game in the ${chosen_league_name} you would've ${outcome} $${Math.abs(
+      roundedWinnings
+    )}`;
+  } else {
+    document.getElementById("betting_output").innerHTML = "";
+  }
+}
+
+function updateBetting(chosen_bet) {
+  let chosen_league_name = analysis["league_name"];
+  let totalWinnings = (analysis["bet_on_fav"] / 10) * chosen_bet;
+  let roundedWinnings = totalWinnings.toFixed(2);
+  let outcome = "won";
+  if (totalWinnings) {
+    if (totalWinnings < 0) {
+      outcome = "lost";
+    }
+    document.getElementById(
+      "betting_output"
+    ).innerHTML = `If you'd bet $${chosen_bet} on the favourites in every game in the ${chosen_league_name} you would've ${outcome} $${Math.abs(
+      roundedWinnings
+    )}`;
   } else {
     document.getElementById("betting_output").innerHTML = "";
   }
@@ -223,7 +252,7 @@ function GetChosenBet() {
       document.getElementById("betting_output").innerHTML =
         "Please enter a positive number";
     } else {
-      GetAnalysisData();
+      updateBetting(chosen_bet);
     }
   });
 }

@@ -72,7 +72,7 @@ def get_anaylsis(chosen_sport, chosen_league, chosen_season, chosen_bet):
     analysis_dict["perc_fav"] = perc_fav
     league_name = sport.get_league_name(int(chosen_league))
     analysis_dict["league_name"] = league_name
-    bet_on_fav = sport.report_bet_on_fav(int(chosen_bet))
+    bet_on_fav = sport.get_bet_on_fav(int(chosen_bet))
     analysis_dict["bet_on_fav"] = bet_on_fav
     sport.plot_season()
     return analysis_dict
