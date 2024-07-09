@@ -33,8 +33,7 @@ def analysis():
                 )
         else:
             result = {}
-            result["data"] = report_percentage_favourite_all_sports()
-            print(result["data"])
+            result["analysis"] = report_percentage_favourite_all_sports()
         return jsonify(result)
     return render_template("analysis.html", sports=leagues_dict)
 

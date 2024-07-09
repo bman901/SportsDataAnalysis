@@ -15,7 +15,10 @@ window.onload = function () {
     capital_sport = sport;
   }
   FillInTitle(capital_sport);
-  LoadImage(sport);
+  if (sport !== "all-sports") {
+    LoadImage(sport);
+  }
+  clearAll();
 };
 
 $(document).ready(function () {
@@ -28,8 +31,13 @@ $(document).ready(function () {
     },
     success: function (response) {
       data = response.data;
+      analysis = response.analysis;
 
-      CreateLeagueBtns(data);
+      if (sport !== "all-sports") {
+        CreateLeagueBtns(data);
+      } else {
+        loadAllSports(analysis);
+      }
     },
   });
 });
@@ -60,6 +68,22 @@ function createBtn(btn_name, btn_id, location, class_name) {
   btn.textContent = btn_name;
   let body = document.getElementById(location);
   body.appendChild(btn);
+}
+
+function loadAllSports(analysis) {
+  createChartAllSeasons(analysis);
+  allSportsAnalysis(analysis);
+}
+
+function clearAll() {
+  if (sport === "all-sports") {
+    document.getElementById("league_heading").innerHTML = "";
+    document.getElementById("league_col").className = "";
+    document.getElementById("season_col").className = "";
+    document.getElementById("result_col").className = "col";
+    document.getElementById("result_col").align = "center";
+    document.getElementById("perc_fav").innerHTML = "";
+  }
 }
 
 function TitleCase(str) {
@@ -126,7 +150,7 @@ function GetChosenLeague() {
   }
 }
 
-// Add an All Seasons button?
+// Add an All Seasons button
 
 function LoadAvailableSeasons(data, chosen_league) {
   LoadImage(sport);
@@ -200,6 +224,21 @@ function PercentageAnalysis(analysis) {
     document.getElementById("perc_fav").innerHTML =
       "No data for the chosen season";
   }
+}
+
+function allSportsAnalysis(analysis) {
+  max = 0;
+  best = 0;
+  league = "";
+  for (const [key, value] of Object.entries(analysis)) {
+    if (value > max) {
+      best = value;
+      league = key;
+    }
+  }
+  best = (best * 100).toFixed(2);
+  document.getElementById("perc_fav").innerHTML =
+    `${league} has the highest percentage win rate of all leagues analysed this season at ${best}%`;
 }
 
 function ReportBetting(analysis) {
@@ -297,6 +336,46 @@ function createChart(analysis) {
         {
           label: "% wins by favourites",
           data: [perc_fav],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
+function createChartAllSeasons(analysis) {
+  clearGraph();
+  let leagues = [];
+  let perc_fav = [];
+  let new_canvas = document.createElement("canvas");
+  new_canvas.id = "perc_graph";
+  let body = document.getElementById("canvas-div");
+  body.appendChild(new_canvas);
+  const ctx = document.getElementById("perc_graph");
+  for (const [key, value] of Object.entries(analysis)) {
+    leagues.push(key);
+    perc_fav.push(value * 100);
+  }
+  let sport_img = document.getElementById("sport_img");
+  if (sport_img) {
+    sport_img.remove();
+  }
+
+  const myChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: leagues,
+      datasets: [
+        {
+          label: "% wins by favourites",
+          data: perc_fav,
           borderWidth: 1,
         },
       ],

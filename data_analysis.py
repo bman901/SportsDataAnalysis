@@ -42,9 +42,9 @@ def report_percentage_favourite_all_sports():
     for data in leagues_dict:
         for league in data["leagues"]:
             data_analysis = get_all_sports(data, league)
-            report = data_analysis.report_percentage_favourite()
+            report = data_analysis.percentage_fav_win()
             if report:
-                result[data["sport"]] = {"perc_fav": report}
+                result[league["league_name"]] = report
     return result
 
 
@@ -82,6 +82,6 @@ def bet_on_fav_all_sports(bet=10):
                 print(bet_return)
 
 
-# report_percentage_favourite_all_sports() - This won't work at the moment
+# print(report_percentage_favourite_all_sports())
 # plot_percentage_favourite_all_sports()
 # bet_on_fav_all_sports(20)
