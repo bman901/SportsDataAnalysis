@@ -381,6 +381,7 @@ function createChartAllSeasons(analysis) {
       ],
     },
     options: {
+      responsive: true,
       scales: {
         y: {
           beginAtZero: true,
